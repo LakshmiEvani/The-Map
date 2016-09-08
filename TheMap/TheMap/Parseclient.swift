@@ -29,6 +29,7 @@ class ParseClient : NSObject {
     }
     
     
+    
     func getStudentLocations(completionHandler: (result: [StudentLocation]?,error: NSError?) -> Void) {
         
         

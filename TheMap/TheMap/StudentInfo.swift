@@ -11,15 +11,21 @@ import Foundation
 class StudentInformation {
     
     
-    private static var sharedInstance = StudentInformation()
+    private static var studentLocation = [StudentLocation]()
     
-    static func sharedClient() -> StudentInformation {
-        return sharedInstance
+    static func sharedInstance() -> StudentInformation {
+        
+        struct Singleton {
+            
+            static var sharedInstance = StudentInformation()
+        }
+        return Singleton.sharedInstance
+        
     }
     
     var firstName: String!
     var lastName: String!
-    var currentUserId : String!
+    var location: String!
     var mediaURL: String!
     
 }

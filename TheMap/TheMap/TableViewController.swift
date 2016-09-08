@@ -17,25 +17,23 @@ class TableViewController: UITableViewController {
     
     // Properties
     
-    let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+    var appDelegate: AppDelegate!
     
     var client =  Client.sharedInstance()
     
     var parseClient = ParseClient.sharedInstance()
-    
-    var studentLocations = [StudentLocation]()
-    
-    var studentInformation = [StudentInformation]()
+   
+    var locations = [StudentLocation]()
     
     // Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        print("The student information is: ",studentLocations)
         
         studentTableView?.dataSource = self
         studentTableView?.delegate = self
+        appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         
         parseClient.getStudentLocations { (results, error) in
             
@@ -43,7 +41,9 @@ class TableViewController: UITableViewController {
                 
                 for result in results! {
                     
-                        self.studentLocationUpdate()
+                    self.locations.append(result)
+                    self.studentLocationUpdate()
+                    
                     
                 }
                 
@@ -82,15 +82,15 @@ class TableViewController: UITableViewController {
     //Function for defining the contents for each row
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return studentInformation.count
+        return locations.count
     }
     
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-            
-            let cell = tableView.dequeueReusableCellWithIdentifier("StudentLocationTableViewCell") as! StudentLocationTableViewCell
-            let location = studentInformation[indexPath.row]
+            studentTableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "studentCell")
+            let cell = studentTableView.dequeueReusableCellWithIdentifier("StudentLocationTableViewCell") as! StudentLocationTableViewCell
+            let location = parseClient.studentLocations[indexPath.row]
             cell.configureWithStudentLocation(location)
             cell.textLabel?.text = location.firstName + "" + location.lastName
             cell.detailTextLabel!.text = location.mediaURL
@@ -104,7 +104,7 @@ class TableViewController: UITableViewController {
             
             let app = UIApplication.sharedApplication()
             
-            let location = studentInformation[indexPath.row]
+            let location = parseClient.studentLocations[indexPath.row]
             let url = location.mediaURL
             
             app.openURL(NSURL(string: url)!)

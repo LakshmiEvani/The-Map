@@ -155,13 +155,38 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="studentList" id="Jze-ee-Wvl">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="StudentLocationTableViewCell" textLabel="oo0-5d-uCM" detailTextLabel="GIW-sU-UFw" imageView="jK5-J7-3q2" style="IBUITableViewCellStyleSubtitle" id="Jze-ee-Wvl" customClass="StudentLocationTableViewCell" customModule="TheMap" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="92" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Jze-ee-Wvl" id="iqM-Rz-5MC">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="oo0-5d-uCM">
+                                            <rect key="frame" x="62" y="5" width="32" height="20"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="GIW-sU-UFw">
+                                            <rect key="frame" x="62" y="25" width="41" height="14"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="pin" id="jK5-J7-3q2">
+                                            <rect key="frame" x="15" y="5" width="32" height="32"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </imageView>
+                                    </subviews>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="nameLabel" destination="oo0-5d-uCM" id="VXI-oQ-SbH"/>
+                                    <outlet property="pinImageView" destination="jK5-J7-3q2" id="Ole-bL-Pic"/>
+                                    <outlet property="urlLabel" destination="GIW-sU-UFw" id="yAg-KW-qz3"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -177,11 +202,15 @@
                         </barButtonItem>
                         <rightBarButtonItems>
                             <barButtonItem systemItem="refresh" id="0EB-Xd-VDY"/>
-                            <barButtonItem image="pin" id="3Rx-0q-tNq"/>
+                            <barButtonItem image="pin" id="3Rx-0q-tNq">
+                                <connections>
+                                    <segue destination="Sex-ga-A4q" kind="modal" id="jmo-wd-Cem"/>
+                                </connections>
+                            </barButtonItem>
                         </rightBarButtonItems>
                     </navigationItem>
                     <connections>
-                        <outlet property="studentTableView" destination="ZDd-p7-vas" id="SMe-TI-H2C"/>
+                        <outlet property="studentTableView" destination="ZDd-p7-vas" id="GgC-h9-2sE"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hbY-86-svq" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -209,7 +238,11 @@
                                     <action selector="refreshButtonPressed:" destination="TVt-53-k2I" id="vRC-RZ-CdR"/>
                                 </connections>
                             </barButtonItem>
-                            <barButtonItem image="pin" id="H0C-ZH-cKu"/>
+                            <barButtonItem image="pin" id="H0C-ZH-cKu">
+                                <connections>
+                                    <segue destination="Sex-ga-A4q" kind="modal" id="Cew-oO-6TJ"/>
+                                </connections>
+                            </barButtonItem>
                         </rightBarButtonItems>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
@@ -318,7 +351,7 @@
                     <connections>
                         <outlet property="cancelButton" destination="SJI-63-SRw" id="5l3-GV-Eaz"/>
                         <outlet property="findButton" destination="XnW-j5-GcP" id="QUr-sR-yIh"/>
-                        <outlet property="mapString" destination="Sua-8h-aja" id="Dnc-RR-ScK"/>
+                        <outlet property="mapString" destination="Sua-8h-aja" id="n70-th-b7a"/>
                         <outlet property="mapView" destination="wYy-hA-OtC" id="Ir9-li-CKN"/>
                         <outlet property="mediaURL" destination="A1Y-Ss-eco" id="0pF-e1-gmJ"/>
                         <outlet property="postingMapView" destination="wYy-hA-OtC" id="awq-Jd-dcd"/>
@@ -408,4 +441,7 @@
         <image name="list" width="32" height="32"/>
         <image name="pin" width="32" height="32"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="jmo-wd-Cem"/>
+    </inferredMetricsTieBreakers>
 </document>

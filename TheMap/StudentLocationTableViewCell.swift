@@ -21,8 +21,8 @@ class StudentLocationTableViewCell: UITableViewCell {
     
     // Configure UI
     
-    func configureWithStudentLocation(studentLocation: StudentInformation) {
-        pinImageView.image = UIImage(named: "Pin")
+    func configureWithStudentLocation(studentLocation: StudentLocation) {
+        pinImageView.image! = UIImage(named: "pin")!
         nameLabel.text = studentLocation.firstName
         urlLabel.text = studentLocation.lastName
     }

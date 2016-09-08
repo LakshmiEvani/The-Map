@@ -81,7 +81,7 @@ class DetailViewController: UIViewController,MKMapViewDelegate, UITextFieldDeleg
             view.addSubview(activityView)
             
             /* Make the UI appear disabled */
-            let views = [cancelButton!, studyingLabel!, mapString!, locationPromptView!, findButton!]
+            let views = [cancelButton, studyingLabel, mapString, locationPromptView, findButton]
        
             
             /* Geocode the provided string */
@@ -128,23 +128,24 @@ class DetailViewController: UIViewController,MKMapViewDelegate, UITextFieldDeleg
         
         guard mediaURL.text! != "" else{
             
-            let alertTitle = "No URL provided"
-            let alertMessage = "You must enter a URL before proceeding"
+            let alertTitle = "No URL"
+            let alertMessage = "Please enter a url"
             let actionTitle = "OK"
             showAlert(alertTitle, alertMessage: alertMessage, actionTitle: actionTitle)
             return
         }
         
         guard UIApplication.sharedApplication().canOpenURL(NSURL(string: mediaURL.text!)!) else {
-            let alertTitle = "Invalid URL provided"
-            let alertMessage = "You must enter a valid URL before proceeding. Ensure you include http:// or https://"
+            let alertTitle = "Invalid URL"
+            let alertMessage = "You must enter a valid URL. Ensure you include http:// or https://"
             let actionTitle = "OK"
             showAlert(alertTitle, alertMessage: alertMessage, actionTitle: actionTitle)
             return
         }
         
-        let studentLocationArray: [String : AnyObject] = [
-            ParseClient.JSONBodyKeys.UniqueKey: appDelegate.userID!,
+        let studentLocationArray: [String:AnyObject] = [
+            
+           ParseClient.JSONBodyKeys.UniqueKey: appDelegate.userID!,
             ParseClient.JSONBodyKeys.FirstName: appDelegate.userData[0],
             ParseClient.JSONBodyKeys.LastName: appDelegate.userData[1],
             ParseClient.JSONBodyKeys.MapString: studentLocationName,
@@ -199,7 +200,7 @@ class DetailViewController: UIViewController,MKMapViewDelegate, UITextFieldDeleg
         }
     }
     
-    // MARK: Configure UI
+    // Configure UI
     
     private func dismissController() {
         if let presentingViewController = presentingViewController {
@@ -207,7 +208,7 @@ class DetailViewController: UIViewController,MKMapViewDelegate, UITextFieldDeleg
         }
     }
     
-     //MARK: -- Textfield delegate functions
+     // Textfield delegate functions
     
     private func resignIfFirstResponder(textField: UITextField) {
         if textField.isFirstResponder() {
@@ -215,7 +216,7 @@ class DetailViewController: UIViewController,MKMapViewDelegate, UITextFieldDeleg
         }
     }
     
-    //MARK: -- Error helper functions
+    // Error helper functions
     func showAlert(alertTitle: String, alertMessage: String, actionTitle: String){
         let alert = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .Alert)
         alert.addAction(UIAlertAction(title: actionTitle, style: .Default, handler: nil))
