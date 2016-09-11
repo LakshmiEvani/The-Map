@@ -45,9 +45,15 @@ class LogInViewController: UIViewController, UITextFieldDelegate{
     
     @IBAction func logInButtonAction(sender: AnyObject) {
         
+        
+        
         if (email.text!.isEmpty || passWord.text!.isEmpty) {
             
-            loginLabel.text = "Username or Password field are empty"
+            let alertTitle = "No username or Password"
+            let alertMessage = "Please enter a valid username or password"
+            let actionTitle = "OK"
+            showAlert(alertTitle, alertMessage: alertMessage, actionTitle: actionTitle)
+            
         } else {
             
             client.udacityLogIn(email.text!, password: passWord.text!, CompletionHandler: { (result, error) in
@@ -102,7 +108,14 @@ class LogInViewController: UIViewController, UITextFieldDelegate{
         
     }
     
-    
+    // Error help function
+    func showAlert(alertTitle: String, alertMessage: String, actionTitle: String){
+        let alert = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .Alert)
+        alert.addAction(UIAlertAction(title: actionTitle, style: .Default, handler: nil))
+        
+        self.presentViewController(alert, animated: true, completion: nil)
+    }
+
     
 }
 

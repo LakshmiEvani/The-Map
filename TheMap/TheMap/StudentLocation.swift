@@ -24,11 +24,11 @@ struct StudentLocation {
     
     
     static var studentData = [StudentLocation]()
-  
+    
     
     init(students : [String:AnyObject]) {
         
-      
+        
         
         let dateFormatter = NSDateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
@@ -50,25 +50,25 @@ struct StudentLocation {
         return CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
     }
     
-
+    
+    
     
     static func locationsFromDictionaries(dictionaries: [[String:AnyObject]]) -> [StudentLocation] {
         
         var studentLocations = [StudentLocation]()
-
         
         for studentDictionary in dictionaries {
             studentLocations.append(StudentLocation(students: studentDictionary))
             let sortedArray = studentLocations.sort() {$0.updatedAt.compare($1.updatedAt) == NSComparisonResult.OrderedDescending}
-
+            
             studentLocations = sortedArray
             
         }
-       
+        
         return studentLocations
         
     }
     
-
     
-   }
+    
+}

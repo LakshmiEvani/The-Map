@@ -41,11 +41,9 @@ class ParseClient : NSObject {
         let session = NSURLSession.sharedSession()
         let task = session.dataTaskWithRequest(request) { data, response, error in
             if error != nil { /* Handle error */
-                
                 completionHandler(result: nil, error: error)
-                
             }
-            
+        
             let parsedResult = try! NSJSONSerialization.JSONObjectWithData(data!,options: NSJSONReadingOptions.AllowFragments) as! NSDictionary
             
             if let results = parsedResult["results"] as? [[String: AnyObject]] {
@@ -59,7 +57,7 @@ class ParseClient : NSObject {
                 
                 completionHandler(result: nil, error: NSError(domain: "getStudentLocations", code: 0, userInfo:  [NSLocalizedDescriptionKey: "No records found"]))
             }
-            //print(NSString(data: data!, encoding: NSUTF8StringEncoding))
+
         }
         
         task.resume()
@@ -83,7 +81,6 @@ class ParseClient : NSObject {
                 
                 completionHandler(success: true, error: nil)
             }
-            print(NSString(data: data!, encoding: NSUTF8StringEncoding))
         }
         task.resume()
         
