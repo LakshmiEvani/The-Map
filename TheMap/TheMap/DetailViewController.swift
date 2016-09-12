@@ -54,7 +54,6 @@ class DetailViewController: UIViewController,MKMapViewDelegate, UITextFieldDeleg
         
         mapView.delegate = self
         
-        print("User Location",userLocation)
         
         firstView()
         
@@ -146,6 +145,8 @@ class DetailViewController: UIViewController,MKMapViewDelegate, UITextFieldDeleg
             return
         }
         
+     
+        
         let studentLocationArray: [String:AnyObject] = [
             
             ParseClient.JSONBodyKeys.UniqueKey: appDelegate.userID!,
@@ -157,6 +158,7 @@ class DetailViewController: UIViewController,MKMapViewDelegate, UITextFieldDeleg
             ParseClient.JSONBodyKeys.Longitude: studentLon
             
         ]
+        
         
         ParseClient.sharedInstance().postStudentLocations(studentLocationArray) {(success, error) in
             
@@ -171,6 +173,7 @@ class DetailViewController: UIViewController,MKMapViewDelegate, UITextFieldDeleg
                     self.dismissViewControllerAnimated(true, completion: nil)
                     self.cancelButton.hidden = false
                 }
+
                 return
             }
             
@@ -238,7 +241,6 @@ class DetailViewController: UIViewController,MKMapViewDelegate, UITextFieldDeleg
         
         locationPromptView?.bringSubviewToFront(mapView)
         
-        locationPromptView?.hidden = true
         mapView?.hidden = false
         findButton?.hidden = true
         studyingLabel?.hidden = true
