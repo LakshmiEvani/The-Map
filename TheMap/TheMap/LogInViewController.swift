@@ -108,6 +108,7 @@ class LogInViewController: UIViewController, UITextFieldDelegate{
         
     }
     
+    
     // Error help function
     func showAlert(alertTitle: String, alertMessage: String, actionTitle: String){
         let alert = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .Alert)

@@ -56,7 +56,7 @@ class DetailViewController: UIViewController,MKMapViewDelegate, UITextFieldDeleg
         
         print("User Location",userLocation)
         
-        informationPostingView()
+        firstView()
         
     }
     
@@ -66,7 +66,7 @@ class DetailViewController: UIViewController,MKMapViewDelegate, UITextFieldDeleg
     
     @IBAction func findOnTheMap(sender: AnyObject) {
         
-        tapped()
+        secondView()
         let geocoder = CLGeocoder()
         if let stringToGeocode = mapString.text {
             guard stringToGeocode != "" else {
@@ -210,7 +210,7 @@ class DetailViewController: UIViewController,MKMapViewDelegate, UITextFieldDeleg
     // Configure UI
     
     
-    func informationPostingView() {
+    func firstView() {
         
         locationPromptView?.hidden = false
         mapView?.hidden = true
@@ -225,7 +225,7 @@ class DetailViewController: UIViewController,MKMapViewDelegate, UITextFieldDeleg
         
         // Added subview and gesture
         
-        let singleTap = UITapGestureRecognizer(target: findButton, action: Selector("tapped"))
+        let singleTap = UITapGestureRecognizer(target: findButton, action: Selector("secondView"))
         singleTap.numberOfTapsRequired = 1
         
         locationPromptView?.addSubview(mapView)
@@ -234,7 +234,7 @@ class DetailViewController: UIViewController,MKMapViewDelegate, UITextFieldDeleg
     }
     
     
-    func tapped(){
+    func secondView(){
         
         locationPromptView?.bringSubviewToFront(mapView)
         
