@@ -102,10 +102,6 @@ class LogInViewController: UIViewController, UITextFieldDelegate{
     func completeLogin() {
         
         performSegueWithIdentifier("TabBarController", sender: nil)
-        
-        //let controller = storyboard!.instantiateViewControllerWithIdentifier("TabBarController") as! UINavigationController
-        // presentViewController(controller, animated: true, completion: nil)
-        
     }
     
     

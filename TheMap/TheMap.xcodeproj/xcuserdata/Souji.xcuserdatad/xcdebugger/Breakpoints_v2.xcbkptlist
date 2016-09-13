@@ -535,11 +535,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TheMap/DetailViewController.swift"
-            timestampString = "495390923.028752"
+            timestampString = "495465752.318791"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "69"
-            endingLineNumber = "69"
+            startingLineNumber = "71"
+            endingLineNumber = "71"
             landmarkName = "findOnTheMap(_:)"
             landmarkType = "5">
          </BreakpointContent>

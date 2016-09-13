@@ -38,7 +38,7 @@ class Client: NSObject {
             } else {
                 let newData = data!.subdataWithRange(NSMakeRange(5, data!.length - 5))
                 CompletionHandler(result: newData, error: nil)
-                Client.parseJSONWithCompletionHandler(newData, completionHandler: CompletionHandler)
+               // Client.parseJSONWithCompletionHandler(newData, completionHandler: CompletionHandler)
             }
             /* subset response data! */
             //print(NSString(data: newData, encoding: NSUTF8StringEncoding))

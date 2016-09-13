@@ -54,6 +54,8 @@ class DetailViewController: UIViewController,MKMapViewDelegate, UITextFieldDeleg
         
         mapView.delegate = self
         
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
+        view.addGestureRecognizer(tap)
         
         firstView()
         
@@ -128,7 +130,7 @@ class DetailViewController: UIViewController,MKMapViewDelegate, UITextFieldDeleg
     
     @IBAction func submitStudentLocation(sender: AnyObject) {
         
-        guard mediaURL.text! == "" else{
+        guard mediaURL != nil else{
             
             let alertTitle = "No URL"
             let alertMessage = "Please enter a url"
@@ -149,7 +151,7 @@ class DetailViewController: UIViewController,MKMapViewDelegate, UITextFieldDeleg
         
         let studentLocationArray: [String:AnyObject] = [
             
-            ParseClient.JSONBodyKeys.UniqueKey: appDelegate.userID!,
+        //    ParseClient.JSONBodyKeys.UniqueKey: appDelegate.userID!,
             ParseClient.JSONBodyKeys.FirstName: appDelegate.userData[0],
             ParseClient.JSONBodyKeys.LastName: appDelegate.userData[1],
             ParseClient.JSONBodyKeys.MapString: studentLocationName,
@@ -160,7 +162,7 @@ class DetailViewController: UIViewController,MKMapViewDelegate, UITextFieldDeleg
         ]
         
         
-        ParseClient.sharedInstance().postStudentLocations(studentLocationArray) {(success, error) in
+        ParseClient.sharedInstance().postStudentLocations(studentLocationArray) { (success, error) in
             
             guard error == nil else {
                 
@@ -272,5 +274,9 @@ class DetailViewController: UIViewController,MKMapViewDelegate, UITextFieldDeleg
         self.presentViewController(alert, animated: true, completion: nil)
     }
     
+    func dismissKeyboard() {
+        //Causes the view (or one of its embedded text fields) to resign the first responder status.
+        view.endEditing(true)
+    }
     
 }
