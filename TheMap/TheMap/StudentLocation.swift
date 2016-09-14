@@ -23,8 +23,7 @@ struct StudentLocation {
     var updatedAt: NSDate
     
     
-    static var studentData = [StudentLocation]()
-    
+    static var studentLocation = [StudentLocation]()
     
     init(students : [String:AnyObject]) {
         

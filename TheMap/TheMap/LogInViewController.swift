@@ -45,8 +45,6 @@ class LogInViewController: UIViewController, UITextFieldDelegate{
     
     @IBAction func logInButtonAction(sender: AnyObject) {
         
-        
-        
         if (email.text!.isEmpty || passWord.text!.isEmpty) {
             
             let alertTitle = "No username or Password"
@@ -72,7 +70,7 @@ class LogInViewController: UIViewController, UITextFieldDelegate{
         
         
     }
-    
+
     
     // Action Functions
     

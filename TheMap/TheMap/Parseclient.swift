@@ -48,8 +48,9 @@ class ParseClient : NSObject {
             
             if let results = parsedResult["results"] as? [[String: AnyObject]] {
                 
+
                 self.studentLocations = StudentLocation.locationsFromDictionaries(results)
-                
+                StudentInformation.sharedInstance().studentLocation = self.studentLocations
                 completionHandler(result: self.studentLocations , error: nil)
             
                 
@@ -63,7 +64,7 @@ class ParseClient : NSObject {
         task.resume()
         
     }
-    func postStudentLocations(jsonBody: [String:AnyObject], completionHandler: (success: Bool,error: NSError?)  -> Void) {
+    func postStudentLocations(completionHandler: (success: Bool,error: NSError?)  -> Void) {
         
         let request = NSMutableURLRequest(URL: NSURL(string: "https://api.parse.com/1/classes/StudentLocation")!)
         request.HTTPMethod = "POST"

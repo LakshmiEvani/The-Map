@@ -22,8 +22,6 @@ class TableViewController: UITableViewController {
     var client =  Client.sharedInstance()
     
     var parseClient = ParseClient.sharedInstance()
-   
-    var locations = [StudentLocation]()
     
     // Life Cycle
     
@@ -41,7 +39,6 @@ class TableViewController: UITableViewController {
                 
                 for result in results! {
                     
-                    self.locations.append(result)
                     self.studentLocationUpdate()
                     
                     
@@ -82,7 +79,7 @@ class TableViewController: UITableViewController {
     //Function for defining the contents for each row
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return locations.count
+        return StudentInformation.sharedInstance().studentLocation.count
     }
     
     
@@ -90,7 +87,7 @@ class TableViewController: UITableViewController {
         
             studentTableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "studentCell")
             let cell = studentTableView.dequeueReusableCellWithIdentifier("StudentLocationTableViewCell") as! StudentLocationTableViewCell
-            let location = parseClient.studentLocations[indexPath.row]
+            let location = StudentInformation.sharedInstance().studentLocation[indexPath.row]
             cell.configureWithStudentLocation(location)
             cell.textLabel?.text = location.firstName + "" + location.lastName
             cell.detailTextLabel!.text = location.mediaURL
@@ -104,7 +101,7 @@ class TableViewController: UITableViewController {
             
             let app = UIApplication.sharedApplication()
             
-            let location = parseClient.studentLocations[indexPath.row]
+            let location = StudentInformation.sharedInstance().studentLocation[indexPath.row]
             let url = location.mediaURL
             
             app.openURL(NSURL(string: url)!)

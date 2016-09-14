@@ -147,22 +147,12 @@ class DetailViewController: UIViewController,MKMapViewDelegate, UITextFieldDeleg
             return
         }
         
-     
         
-        let studentLocationArray: [String:AnyObject] = [
-            
-        //    ParseClient.JSONBodyKeys.UniqueKey: appDelegate.userID!,
-            ParseClient.JSONBodyKeys.FirstName: appDelegate.userData[0],
-            ParseClient.JSONBodyKeys.LastName: appDelegate.userData[1],
-            ParseClient.JSONBodyKeys.MapString: studentLocationName,
-            ParseClient.JSONBodyKeys.MediaURL: mediaURL.text!,
-            ParseClient.JSONBodyKeys.Latitude: studentLat,
-            ParseClient.JSONBodyKeys.Longitude: studentLon
-            
-        ]
+        client.getUserdata { (success, error) in
+       
         
         
-        ParseClient.sharedInstance().postStudentLocations(studentLocationArray) { (success, error) in
+        ParseClient.sharedInstance().postStudentLocations{ (success, error) in
             
             guard error == nil else {
                 
@@ -182,7 +172,7 @@ class DetailViewController: UIViewController,MKMapViewDelegate, UITextFieldDeleg
             performUIUpdatesOnMain{
                 self.dismissViewControllerAnimated(true, completion: nil)
             }
-            
+        }
         }
     }
     

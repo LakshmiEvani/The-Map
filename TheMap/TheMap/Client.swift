@@ -15,6 +15,10 @@ class Client: NSObject {
     /* Authentication state */
     var sessionID: String? = nil
     var userID: Int? = nil
+    var uniqueKey : String? = nil
+    var firstName : String? = nil
+    var lastName : String? = nil
+    var studentLocations = [StudentLocation]()
     
     /* Initializer */
     override init() {
@@ -38,7 +42,7 @@ class Client: NSObject {
             } else {
                 let newData = data!.subdataWithRange(NSMakeRange(5, data!.length - 5))
                 CompletionHandler(result: newData, error: nil)
-               // Client.parseJSONWithCompletionHandler(newData, completionHandler: CompletionHandler)
+                // Client.parseJSONWithCompletionHandler(newData, completionHandler: CompletionHandler)
             }
             /* subset response data! */
             //print(NSString(data: newData, encoding: NSUTF8StringEncoding))
@@ -81,19 +85,33 @@ class Client: NSObject {
     }
     
     
-    func getUserdata(completionHandler:(result: AnyObject!, error: NSError?) -> Void) -> NSURLSessionDataTask {
+    func getUserdata(completionHandler:(success: Bool, error: NSError?) -> Void) -> NSURLSessionDataTask {
         
         let request = NSMutableURLRequest(URL: NSURL(string: "https://www.udacity.com/api/users/3903878747")!)
         let session = NSURLSession.sharedSession()
+        
         let task = session.dataTaskWithRequest(request) { data, response, error in
             if error != nil { // Handle error...
-                completionHandler(result: nil, error: error)
+                completionHandler(success: false, error: error)
             } else {
                 let newData = data!.subdataWithRange(NSMakeRange(5, data!.length - 5)) /* subset response data! */
-                completionHandler(result: newData, error: nil)
+                
+                let result = try! NSJSONSerialization.JSONObjectWithData(data!,options: NSJSONReadingOptions.AllowFragments) as! NSDictionary
+                
+                if let results = result["results"] as? [[String: AnyObject]] {
+                    
+                    
+                    self.studentLocations = StudentLocation.locationsFromDictionaries(results)
+                    StudentInformation.sharedInstance().studentLocation = self.studentLocations
+                    completionHandler(success: true, error: nil)
+                    
+                    
+                } else {
+                    
+                    completionHandler(success: false, error: NSError(domain: "getStudentLocations", code: 0, userInfo:  [NSLocalizedDescriptionKey: "No records found"]))
+                }
                 
             }
-            
             // println(NSString(data: newData, encoding: NSUTF8StringEncoding))
         }
         task.resume()
@@ -125,7 +143,7 @@ class Client: NSObject {
         task.resume()
         return task
     }
-
+    
     
     func taskForGetMethod(method: String, completionHandler:(result: AnyObject!, error: NSError?) -> Void) -> NSURLSessionDataTask {
         
