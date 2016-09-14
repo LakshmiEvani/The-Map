@@ -130,6 +130,7 @@ class DetailViewController: UIViewController,MKMapViewDelegate, UITextFieldDeleg
     
     @IBAction func submitStudentLocation(sender: AnyObject) {
         
+        
         guard mediaURL != nil else{
             
             let alertTitle = "No URL"
@@ -139,14 +140,13 @@ class DetailViewController: UIViewController,MKMapViewDelegate, UITextFieldDeleg
             return
         }
         
-        guard UIApplication.sharedApplication().canOpenURL(NSURL(string: mediaURL.text!)!) else {
+        guard  UIApplication.sharedApplication().canOpenURL(NSURL(string: mediaURL.text!)!) else {
             let alertTitle = "Invalid URL"
             let alertMessage = "You must enter a valid URL. Ensure you include http:// or https://"
             let actionTitle = "OK"
-            showAlert(alertTitle, alertMessage: alertMessage, actionTitle: actionTitle)
+            self.showAlert(alertTitle, alertMessage: alertMessage, actionTitle: actionTitle)
             return
         }
-        
         
         client.getUserdata { (success, error) in
             
@@ -201,44 +201,35 @@ class DetailViewController: UIViewController,MKMapViewDelegate, UITextFieldDeleg
         
         ParseClient.sharedInstance().postStudentLocations{ (success, error) in
             
-            guard error == nil else {
+          if success {
+            
+            performUIUpdatesOnMain{
                 
-                let alertTitle = "Couldn't submit your location"
-                let alertMessage = "There was an error while trying to post your location to the server."
-                let actionTitle = "Try again"
+                let tabViews = self.storyboard!.instantiateViewControllerWithIdentifier("MapTabBarController") as! UITabBarController
+                self.presentViewController(tabViews, animated: false, completion: nil)
                 
-                performUIUpdatesOnMain {
-                    self.showAlert(alertTitle, alertMessage: alertMessage, actionTitle: actionTitle)
-                    self.dismissViewControllerAnimated(true, completion: nil)
-                    self.cancelButton.hidden = false
-                }
-                
-                return
+            }   } else {
+            
+            let alertTitle = "Couldn't submit your location"
+            let alertMessage = "There was an error while trying to post your location to the server."
+            let actionTitle = "Try again"
+            
+            performUIUpdatesOnMain {
+                self.showAlert(alertTitle, alertMessage: alertMessage, actionTitle: actionTitle)
+                self.dismissViewControllerAnimated(true, completion: nil)
+                self.cancelButton.hidden = false
             }
             
-        }
-        
-        performUIUpdatesOnMain{
-           self.goBackToTabs()
+            return
+            }
             
-        }
-    }
+            }
 
+        }
+    
     
 
-    // After submitted action function
 
-    func goBackToTabs() {
-        
-        performUIUpdatesOnMain {
-            
-            let tabViews = self.storyboard!.instantiateViewControllerWithIdentifier("MapTabBarController") as! UITabBarController
-            self.presentViewController(tabViews, animated: false, completion: nil)
-            
-        }
-        
-    }
-    
     // Configure UI
     
     

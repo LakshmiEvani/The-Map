@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		8704306C1D4F87F4008714CF /* Parseclient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8704306B1D4F87F4008714CF /* Parseclient.swift */; };
 		8704306E1D4F8811008714CF /* Parseconstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8704306D1D4F8811008714CF /* Parseconstants.swift */; };
+		8773B69C1D89B3580012370E /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8773B69B1D89B3580012370E /* Reachability.swift */; };
 		87843D181D7EF930009FD4E5 /* BorderedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87843D171D7EF930009FD4E5 /* BorderedButton.swift */; };
 		87843D1A1D7EF984009FD4E5 /* StudentLocationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87843D191D7EF984009FD4E5 /* StudentLocationTableViewCell.swift */; };
 		878EBFA81D2D5D8E00485578 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 878EBFA71D2D5D8E00485578 /* AppDelegate.swift */; };
@@ -48,6 +49,7 @@
 /* Begin PBXFileReference section */
 		8704306B1D4F87F4008714CF /* Parseclient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Parseclient.swift; sourceTree = "<group>"; };
 		8704306D1D4F8811008714CF /* Parseconstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Parseconstants.swift; sourceTree = "<group>"; };
+		8773B69B1D89B3580012370E /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		87843D171D7EF930009FD4E5 /* BorderedButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BorderedButton.swift; sourceTree = "<group>"; };
 		87843D191D7EF984009FD4E5 /* StudentLocationTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentLocationTableViewCell.swift; sourceTree = "<group>"; };
 		878EBFA41D2D5D8E00485578 /* TheMap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TheMap.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -159,6 +161,7 @@
 			isa = PBXGroup;
 			children = (
 				878EBFA91D2D5D8E00485578 /* LogInViewController.swift */,
+				8773B69B1D89B3580012370E /* Reachability.swift */,
 				87E230FF1D3E6AEF00B7A20A /* MapViewController.swift */,
 				87E296A41D6746D7009C5CBC /* TableViewController.swift */,
 				87E296A81D6E4EF6009C5CBC /* DetailViewController.swift */,
@@ -334,6 +337,7 @@
 				8704306C1D4F87F4008714CF /* Parseclient.swift in Sources */,
 				878EBFDE1D37CFA100485578 /* StudentLocation.swift in Sources */,
 				878EBFD61D2D6CC100485578 /* Constants.swift in Sources */,
+				8773B69C1D89B3580012370E /* Reachability.swift in Sources */,
 				878EBFDB1D367B1D00485578 /* StudentInfo.swift in Sources */,
 				87843D181D7EF930009FD4E5 /* BorderedButton.swift in Sources */,
 				87843D1A1D7EF984009FD4E5 /* StudentLocationTableViewCell.swift in Sources */,

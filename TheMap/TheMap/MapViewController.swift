@@ -36,46 +36,58 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         
         parseClient.getStudentLocations { (results, error) in
             
-            var annotations = [MKPointAnnotation]()
-           
-            for dictionary in results!{
+            if error == nil {
                 
-               
+                var annotations = [MKPointAnnotation]()
                 
-                // Notice that the float values are being used to create CLLocationDegree values.
-                // This is a version of the Double type.
+                for dictionary in results!{
+                    
+                    
+                    
+                    // Notice that the float values are being used to create CLLocationDegree values.
+                    // This is a version of the Double type.
+                    
+                    if dictionary.longitude != nil && dictionary.longitude != nil {
+                        let lat = CLLocationDegrees(dictionary.latitude)
+                        let lon = CLLocationDegrees(dictionary.longitude)
+                        let first = dictionary.firstName
+                        let last = dictionary.lastName
+                        let mediaurl = dictionary.mediaURL
+                        /* Get the lat and lon values to create a coordinate */
+                        
+                        
+                        
+                        
+                        // Here we create the annotation and set its coordiate, title, and subtitle properties
+                        let annotation =  MKPointAnnotation()
+                        let coordinate = CLLocationCoordinate2D(latitude: lat, longitude: lon)
+                        
+                        annotation.coordinate = coordinate
+                        annotation.title = "\(first) \(last)"
+                        annotation.subtitle = mediaurl
+                        
+                        // Finally we place the annotation in an array of annotations.
+                        annotations.append(annotation)
+                    }
+                    
+                    performUIUpdatesOnMain {
+                        // When the array is complete, we add the annotations to the map.
+                        self.mapView.addAnnotations(annotations)
+                    }
+                }
+            } else {
                 
-                if dictionary.longitude != nil && dictionary.longitude != nil {
-                let lat = CLLocationDegrees(dictionary.latitude)
-                let lon = CLLocationDegrees(dictionary.longitude)
-                let first = dictionary.firstName
-                let last = dictionary.lastName
-                let mediaurl = dictionary.mediaURL
-                /* Get the lat and lon values to create a coordinate */
-           
-               
+                print("Map downloaded failed")
                 
+                let alertTitle = "Map Download error"
+                let alertMessage = "Map could not download"
+                let actionTitle = "OK"
+                self.showAlert(alertTitle, alertMessage: alertMessage, actionTitle: actionTitle)
                 
-                // Here we create the annotation and set its coordiate, title, and subtitle properties
-                let annotation =  MKPointAnnotation()
-                 let coordinate = CLLocationCoordinate2D(latitude: lat, longitude: lon)
-            
-                annotation.coordinate = coordinate
-                annotation.title = "\(first) \(last)"
-                annotation.subtitle = mediaurl
-                
-                // Finally we place the annotation in an array of annotations.
-                annotations.append(annotation)
             }
             
-            performUIUpdatesOnMain {
-                // When the array is complete, we add the annotations to the map.
-                self.mapView.addAnnotations(annotations)
-            }
-            }
         }
     }
-    
     
     // Actions
     
@@ -135,5 +147,12 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         }
     }
     
+    // Error help function
+    func showAlert(alertTitle: String, alertMessage: String, actionTitle: String){
+        let alert = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .Alert)
+        alert.addAction(UIAlertAction(title: actionTitle, style: .Default, handler: nil))
+        
+        self.presentViewController(alert, animated: true, completion: nil)
+    }
     
 }

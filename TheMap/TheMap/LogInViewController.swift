@@ -45,32 +45,42 @@ class LogInViewController: UIViewController, UITextFieldDelegate{
     
     @IBAction func logInButtonAction(sender: AnyObject) {
         
-        if (email.text!.isEmpty || passWord.text!.isEmpty) {
+        if Reachability.isConnectedToNetwork() == true {
             
-            let alertTitle = "No username or Password"
-            let alertMessage = "Please enter a valid username or password"
-            let actionTitle = "OK"
-            showAlert(alertTitle, alertMessage: alertMessage, actionTitle: actionTitle)
-            
-        } else {
-            
-            client.udacityLogIn(email.text!, password: passWord.text!, CompletionHandler: { (result, error) in
+            if (email.text!.isEmpty || passWord.text!.isEmpty) {
                 
-                performUIUpdatesOnMain{
+                let alertTitle = "No username or Password"
+                let alertMessage = "Please enter a valid username or password"
+                let actionTitle = "OK"
+                showAlert(alertTitle, alertMessage: alertMessage, actionTitle: actionTitle)
+                
+            } else {
+                
+                client.udacityLogIn(email.text!, password: passWord.text!) { (result, error) in
                     
-                    self.client.getUserdata{ (success, error) in
+                    performUIUpdatesOnMain{
                         
-                    if let userKey = result {
-                        
-                        self.completeLogin()
-                       
+                        if let userKey = result {
+                                
+                                self.completeLogin()
+                                
+                            
                         }
                     }
                 }
-            })
+            }
+            print("Internet connection OK")
+        
+    } else {
             
+            print("Internet connection FAILED")
+            
+            let alertTitle = "No Internet Connection"
+            let alertMessage = "Make sure your device is connected to the internet"
+            let actionTitle = "OK"
+            self.showAlert(alertTitle, alertMessage: alertMessage, actionTitle: actionTitle)
+        
         }
-
     }
     
     // Action Functions
@@ -99,8 +109,9 @@ class LogInViewController: UIViewController, UITextFieldDelegate{
     
     
     func completeLogin() {
+       
+            performSegueWithIdentifier("TabBarController", sender: nil)
         
-        performSegueWithIdentifier("TabBarController", sender: nil)
     }
     
     

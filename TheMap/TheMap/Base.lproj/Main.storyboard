@@ -286,7 +286,7 @@
                                 <rect key="frame" x="39" y="479" width="243" height="30"/>
                                 <state key="normal" title="Submit"/>
                                 <connections>
-                                    <action selector="submitStudentLocation:" destination="Sex-ga-A4q" eventType="touchUpInside" id="7Pr-or-LoA"/>
+                                    <action selector="submitStudentLocation:" destination="Sex-ga-A4q" eventType="touchUpInside" id="Hj5-5o-mOi"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="middleTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HEA-KD-AUl">
@@ -386,6 +386,7 @@ Cg
                             <constraint firstItem="A1Y-Ss-eco" firstAttribute="leading" secondItem="EIO-g2-Q3g" secondAttribute="leadingMargin" constant="-16" id="TJr-Vp-Y3f"/>
                             <constraint firstItem="Sua-8h-aja" firstAttribute="leading" secondItem="EIO-g2-Q3g" secondAttribute="leadingMargin" constant="-8" id="ctI-GA-Up9"/>
                             <constraint firstItem="bSl-y9-VB6" firstAttribute="centerX" secondItem="EIO-g2-Q3g" secondAttribute="centerX" constant="0.5" id="e42-XH-9iW"/>
+                            <constraint firstItem="bSl-y9-VB6" firstAttribute="top" secondItem="wYy-hA-OtC" secondAttribute="top" constant="336" id="fpw-W8-O89"/>
                             <constraint firstAttribute="trailing" secondItem="wYy-hA-OtC" secondAttribute="trailing" id="hmv-bd-tDF"/>
                             <constraint firstItem="wYy-hA-OtC" firstAttribute="leading" secondItem="EIO-g2-Q3g" secondAttribute="leading" id="jJw-v3-XYT"/>
                             <constraint firstItem="bSl-y9-VB6" firstAttribute="width" secondItem="EIO-g2-Q3g" secondAttribute="width" constant="-77" id="jkQ-pA-FVd"/>
@@ -409,7 +410,7 @@ Cg
                         <outlet property="mediaURL" destination="A1Y-Ss-eco" id="0pF-e1-gmJ"/>
                         <outlet property="postingMapView" destination="wYy-hA-OtC" id="awq-Jd-dcd"/>
                         <outlet property="studyingLabel" destination="HEA-KD-AUl" id="FIr-qL-6kO"/>
-                        <outlet property="submitButton" destination="bSl-y9-VB6" id="RMY-Or-2zq"/>
+                        <outlet property="submitButton" destination="bSl-y9-VB6" id="Ykk-ya-wJV"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="D4l-OV-a1L" userLabel="First Responder" sceneMemberID="firstResponder"/>
