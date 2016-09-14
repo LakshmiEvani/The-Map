@@ -149,8 +149,7 @@ class DetailViewController: UIViewController,MKMapViewDelegate, UITextFieldDeleg
         
         
         client.getUserdata { (success, error) in
-       
-        
+
         
         ParseClient.sharedInstance().postStudentLocations{ (success, error) in
             

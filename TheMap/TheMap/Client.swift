@@ -94,22 +94,26 @@ class Client: NSObject {
             if error != nil { // Handle error...
                 completionHandler(success: false, error: error)
             } else {
+                
                 let newData = data!.subdataWithRange(NSMakeRange(5, data!.length - 5)) /* subset response data! */
                 
-                let result = try! NSJSONSerialization.JSONObjectWithData(data!,options: NSJSONReadingOptions.AllowFragments) as! NSDictionary
-                
-                if let results = result["results"] as? [[String: AnyObject]] {
+                do {
+                    
+                    let result = try NSJSONSerialization.JSONObjectWithData(newData,options: NSJSONReadingOptions.AllowFragments) as! NSDictionary
                     
                     
-                    self.studentLocations = StudentLocation.locationsFromDictionaries(results)
-                    StudentInformation.sharedInstance().studentLocation = self.studentLocations
-                    completionHandler(success: true, error: nil)
-                    
-                    
-                } else {
-                    
-                    completionHandler(success: false, error: NSError(domain: "getStudentLocations", code: 0, userInfo:  [NSLocalizedDescriptionKey: "No records found"]))
+                    if let results = result["results"] as? [[String: AnyObject]] {
+                        
+                        
+                        self.studentLocations = StudentLocation.locationsFromDictionaries(results)
+                        StudentInformation.sharedInstance().studentLocation = self.studentLocations
+                        completionHandler(success: true, error: nil)
+                        
+                    }
                 }
+                
+                catch { completionHandler(success: false, error: NSError(domain: "getStudentLocations", code: 0, userInfo:  [NSLocalizedDescriptionKey: "No records found"])) }
+                
                 
             }
             // println(NSString(data: newData, encoding: NSUTF8StringEncoding))

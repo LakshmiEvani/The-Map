@@ -61,13 +61,12 @@ class LogInViewController: UIViewController, UITextFieldDelegate{
                     if let userKey = result {
                         
                         self.completeLogin()
-                        
-                    }
+                       
+                        }
                 }
             })
             
         }
-        
         
     }
 

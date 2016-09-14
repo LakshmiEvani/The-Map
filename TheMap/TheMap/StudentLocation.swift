@@ -23,11 +23,7 @@ struct StudentLocation {
     var updatedAt: NSDate
     
     
-    static var studentLocation = [StudentLocation]()
-    
     init(students : [String:AnyObject]) {
-        
-        
         
         let dateFormatter = NSDateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
