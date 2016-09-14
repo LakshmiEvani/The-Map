@@ -149,29 +149,23 @@ class DetailViewController: UIViewController,MKMapViewDelegate, UITextFieldDeleg
         
         
         client.getUserdata { (success, error) in
-
-        
-        ParseClient.sharedInstance().postStudentLocations{ (success, error) in
             
-            guard error == nil else {
+            if success {
                 
-                let alertTitle = "Couldn't submit your location"
-                let alertMessage = "There was an error while trying to post your location to the server."
-                let actionTitle = "Try again"
+            self.postStudentLocation()
+                
+            } else {
                 
                 performUIUpdatesOnMain {
+                    
+                    let alertTitle = "Couldn't submit your location"
+                    let alertMessage = "There was an error while trying to post your location to the server."
+                    let actionTitle = "Try again"
+                    
                     self.showAlert(alertTitle, alertMessage: alertMessage, actionTitle: actionTitle)
-                    self.dismissViewControllerAnimated(true, completion: nil)
-                    self.cancelButton.hidden = false
+                    
                 }
-
-                return
             }
-            
-            performUIUpdatesOnMain{
-                self.dismissViewControllerAnimated(true, completion: nil)
-            }
-        }
         }
     }
     
@@ -199,6 +193,50 @@ class DetailViewController: UIViewController,MKMapViewDelegate, UITextFieldDeleg
             self.mapView.setRegion(region, animated: true)
             self.mapView.regionThatFits(region)
         }
+    }
+    
+    // Function for posting student location
+    
+    func postStudentLocation() {
+        
+        ParseClient.sharedInstance().postStudentLocations{ (success, error) in
+            
+            guard error == nil else {
+                
+                let alertTitle = "Couldn't submit your location"
+                let alertMessage = "There was an error while trying to post your location to the server."
+                let actionTitle = "Try again"
+                
+                performUIUpdatesOnMain {
+                    self.showAlert(alertTitle, alertMessage: alertMessage, actionTitle: actionTitle)
+                    self.dismissViewControllerAnimated(true, completion: nil)
+                    self.cancelButton.hidden = false
+                }
+                
+                return
+            }
+            
+        }
+        
+        performUIUpdatesOnMain{
+           self.goBackToTabs()
+            
+        }
+    }
+
+    
+
+    // After submitted action function
+
+    func goBackToTabs() {
+        
+        performUIUpdatesOnMain {
+            
+            let tabViews = self.storyboard!.instantiateViewControllerWithIdentifier("MapTabBarController") as! UITabBarController
+            self.presentViewController(tabViews, animated: false, completion: nil)
+            
+        }
+        
     }
     
     // Configure UI

@@ -58,18 +58,20 @@ class LogInViewController: UIViewController, UITextFieldDelegate{
                 
                 performUIUpdatesOnMain{
                     
+                    self.client.getUserdata{ (success, error) in
+                        
                     if let userKey = result {
                         
                         self.completeLogin()
                        
                         }
+                    }
                 }
             })
             
         }
-        
-    }
 
+    }
     
     // Action Functions
     
