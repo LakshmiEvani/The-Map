@@ -48,15 +48,14 @@ class MapViewController: UIViewController, MKMapViewDelegate {
                     // This is a version of the Double type.
                     
                     if dictionary.longitude != nil && dictionary.longitude != nil {
+                        
+                        
+                        /* Get the lat and lon values to create a coordinate */
                         let lat = CLLocationDegrees(dictionary.latitude)
                         let lon = CLLocationDegrees(dictionary.longitude)
                         let first = dictionary.firstName
                         let last = dictionary.lastName
                         let mediaurl = dictionary.mediaURL
-                        /* Get the lat and lon values to create a coordinate */
-                        
-                        
-                        
                         
                         // Here we create the annotation and set its coordiate, title, and subtitle properties
                         let annotation =  MKPointAnnotation()
@@ -96,20 +95,20 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         client.logOutSession { (success, error)  in
             
             performUIUpdatesOnMain{
-            
-               self.dismissViewControllerAnimated(true, completion: nil)
+                
+                self.dismissViewControllerAnimated(true, completion: nil)
             }
         }
     }
     
     @IBAction func refreshButtonPressed(sender: UIBarButtonItem) {
         
-            mapView.reloadInputViews()
+        mapView.reloadInputViews()
         
-            }
-
+    }
     
-
+    
+    
     // MARK: - MKMapViewDelegate
     
     // Here we create a view with a "right callout accessory view". You might choose to look into other

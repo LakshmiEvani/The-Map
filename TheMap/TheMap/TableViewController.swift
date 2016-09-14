@@ -41,9 +41,7 @@ class TableViewController: UITableViewController {
                     
                     self.studentLocationUpdate()
                     
-                    
                 }
-                
                 
             }
             
@@ -85,26 +83,26 @@ class TableViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-            studentTableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "studentCell")
-            let cell = studentTableView.dequeueReusableCellWithIdentifier("StudentLocationTableViewCell") as! StudentLocationTableViewCell
-            let location = StudentInformation.sharedInstance().studentLocation[indexPath.row]
-            cell.configureWithStudentLocation(location)
-            cell.textLabel?.text = location.firstName + "" + location.lastName
-            cell.detailTextLabel!.text = location.mediaURL
+        studentTableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "studentCell")
+        let cell = studentTableView.dequeueReusableCellWithIdentifier("StudentLocationTableViewCell") as! StudentLocationTableViewCell
+        let location = StudentInformation.sharedInstance().studentLocation[indexPath.row]
+        cell.configureWithStudentLocation(location)
+        cell.textLabel?.text = location.firstName + "" + location.lastName
+        cell.detailTextLabel!.text = location.mediaURL
         
         return cell
-       
+        
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
-            
-            let app = UIApplication.sharedApplication()
-            
-            let location = StudentInformation.sharedInstance().studentLocation[indexPath.row]
-            let url = location.mediaURL
-            
-            app.openURL(NSURL(string: url)!)
+        
+        let app = UIApplication.sharedApplication()
+        
+        let location = StudentInformation.sharedInstance().studentLocation[indexPath.row]
+        let url = location.mediaURL
+        
+        app.openURL(NSURL(string: url)!)
         
     }
     

@@ -34,8 +34,6 @@ class LogInViewController: UIViewController, UITextFieldDelegate{
         
     }
     
-    
-    
     // UITextField Delegate
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
@@ -61,25 +59,21 @@ class LogInViewController: UIViewController, UITextFieldDelegate{
                     performUIUpdatesOnMain{
                         
                         if let userKey = result {
-                                
-                                self.completeLogin()
-                                
+                            
+                            self.completeLogin()
+                            
                             
                         }
                     }
                 }
             }
-            print("Internet connection OK")
-        
-    } else {
-            
-            print("Internet connection FAILED")
+        } else {
             
             let alertTitle = "No Internet Connection"
             let alertMessage = "Make sure your device is connected to the internet"
             let actionTitle = "OK"
             self.showAlert(alertTitle, alertMessage: alertMessage, actionTitle: actionTitle)
-        
+            
         }
     }
     
@@ -109,8 +103,8 @@ class LogInViewController: UIViewController, UITextFieldDelegate{
     
     
     func completeLogin() {
-       
-            performSegueWithIdentifier("TabBarController", sender: nil)
+        
+        performSegueWithIdentifier("TabBarController", sender: nil)
         
     }
     
@@ -122,7 +116,7 @@ class LogInViewController: UIViewController, UITextFieldDelegate{
         
         self.presentViewController(alert, animated: true, completion: nil)
     }
-
+    
     
 }
 

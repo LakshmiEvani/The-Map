@@ -131,7 +131,7 @@ class DetailViewController: UIViewController,MKMapViewDelegate, UITextFieldDeleg
     @IBAction func submitStudentLocation(sender: AnyObject) {
         
         
-        guard mediaURL != nil else{
+        guard mediaURL.text != nil else {
             
             let alertTitle = "No URL"
             let alertMessage = "Please enter a url"

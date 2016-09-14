@@ -66,7 +66,7 @@ class ParseClient : NSObject {
     }
     func postStudentLocations(completionHandler: (success: Bool,error: NSError?)  -> Void) {
         
-        let request = NSMutableURLRequest(URL: NSURL(string: "https://api.parse.com/1/classes/StudentLocation")!)
+        let request = NSMutableURLRequest(URL: NSURL(string: "https://parse.udacity.com/parse/classes/StudentLocation")!)
         request.HTTPMethod = "POST"
         request.addValue("QrX47CA9cyuGewLdsL7o5Eb8iug6Em8ye0dnAbIr", forHTTPHeaderField: "X-Parse-Application-Id")
         request.addValue("QuWThTdiRmTux3YaDseUSEpUKo7aBYM737yKd4gY", forHTTPHeaderField: "X-Parse-REST-API-Key")
@@ -117,7 +117,7 @@ class ParseClient : NSObject {
     
     func updateStudentLocation(parameters: String, jsonBody: [String:AnyObject], completionHandler: (success: Bool,error: NSError?) -> Void) {
         
-        let urlString = "https://api.parse.com/1/classes/StudentLocation/8ZExGR5uX8"
+        let urlString = "https://parse.udacity.com/parse/classes/StudentLocation/8ZExGR5uX8"
         let url = NSURL(string: urlString)
         let request = NSMutableURLRequest(URL: url!)
         request.HTTPMethod = "PUT"
