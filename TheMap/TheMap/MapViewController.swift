@@ -103,8 +103,18 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     
     @IBAction func refreshButtonPressed(sender: UIBarButtonItem) {
         
-        mapView.reloadInputViews()
-        
+         if Reachability.isConnectedToNetwork() == true {
+            
+            mapView.reloadInputViews()
+            
+         } else {
+            
+            let alertTitle = "No Internet Connection"
+            let alertMessage = "Make sure your device is connected to the internet"
+            let actionTitle = "OK"
+            self.showAlert(alertTitle, alertMessage: alertMessage, actionTitle: actionTitle)
+
+        }
     }
     
     
