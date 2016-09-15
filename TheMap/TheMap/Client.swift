@@ -93,6 +93,7 @@ class Client: NSObject {
         let task = session.dataTaskWithRequest(request) { data, response, error in
             
             if error != nil { // Handle error...
+                
                 completionHandler(success: false, error: error)
                 
             } else {
@@ -111,7 +112,12 @@ class Client: NSObject {
                         StudentInformation.sharedInstance().studentLocation = self.studentLocations
                         completionHandler(success: true, error: nil)
                         
+                    } else {
+                        
+                        completionHandler(success: false, error: error)
                     }
+                    
+                    
                 }
                 
                 catch { completionHandler(success: false, error: NSError(domain: "getStudentLocations", code: 0, userInfo:  [NSLocalizedDescriptionKey: "No records found"])) }
