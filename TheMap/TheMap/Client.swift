@@ -82,7 +82,7 @@ class Client: NSObject {
     }
     
     
-    func getUserdata(completionHandler:(success: Bool, error: NSError?) -> Void) -> NSURLSessionDataTask {
+    func getUserdata(uniqueKey: String, completionHandler:(success: Bool, error: NSError?) -> Void) -> NSURLSessionDataTask {
         
         let request = NSMutableURLRequest(URL: NSURL(string: "https://www.udacity.com/api/users/3903878747")!)
         let session = NSURLSession.sharedSession()
@@ -96,24 +96,28 @@ class Client: NSObject {
             } else {
                 
                 let newData = data!.subdataWithRange(NSMakeRange(5, data!.length - 5)) /* subset response data! */
+             
                 
                 do {
                     
                     let result = try NSJSONSerialization.JSONObjectWithData(newData,options: NSJSONReadingOptions.AllowFragments) as! NSDictionary
                     
-                    
+                    ParseClient.sharedInstance().updateStudentLocation(uniqueKey, jsonBody: result as! [String : AnyObject]) { (success, error) in
+                        
+                        
                     if let results = result["results"] as? [[String: AnyObject]] {
                         
                         
                         self.studentLocations = StudentLocation.locationsFromDictionaries(results)
                         StudentInformation.sharedInstance().studentLocation = self.studentLocations
                         completionHandler(success: true, error: nil)
+                    
                         
                     } else {
                         
                         completionHandler(success: false, error: error)
                     }
-                    
+                }
                     
                 }
                 

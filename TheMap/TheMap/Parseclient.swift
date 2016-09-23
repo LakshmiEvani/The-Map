@@ -64,7 +64,7 @@ class ParseClient : NSObject {
         task.resume()
         
     }
-    func postStudentLocations(completionHandler: (success: Bool,error: NSError?)  -> Void) {
+    func postStudentLocations(userId: String, firstName: String, lastName: String, mediaURL: String, mapString: String, completionHandler: (success: Bool,error: NSError?)  -> Void) {
         
         let request = NSMutableURLRequest(URL: NSURL(string: "https://parse.udacity.com/parse/classes/StudentLocation")!)
         request.HTTPMethod = "POST"

@@ -45,10 +45,17 @@ class LogInViewController: UIViewController, UITextFieldDelegate{
         
         if Reachability.isConnectedToNetwork() == true {
             
-            if (email.text!.isEmpty || passWord.text!.isEmpty) {
+            if email.text!.isEmpty {
                 
-                let alertTitle = "No username or Password"
-                let alertMessage = "Please enter a valid username or password"
+                let alertTitle = "No username"
+                let alertMessage = "Please enter a username"
+                let actionTitle = "OK"
+                showAlert(alertTitle, alertMessage: alertMessage, actionTitle: actionTitle)
+                
+            } else if passWord.text!.isEmpty {
+                
+                let alertTitle = "No password"
+                let alertMessage = "Please enter a password"
                 let actionTitle = "OK"
                 showAlert(alertTitle, alertMessage: alertMessage, actionTitle: actionTitle)
                 
@@ -56,26 +63,34 @@ class LogInViewController: UIViewController, UITextFieldDelegate{
                 
                 client.udacityLogIn(email.text!, password: passWord.text!) { (result, error) in
                     
-                    performUIUpdatesOnMain{
+                    if error != nil {
                         
-                        if let userKey = result {
+                            let alertTitle = "Invalid username or password"
+                            let alertMessage = "Please enter a valid username and password"
+                            let actionTitle = "OK"
+                            self.showAlert(alertTitle, alertMessage: alertMessage, actionTitle: actionTitle)
                             
-                            self.completeLogin()
-                            
-                            
-                        }
+                        } else {
+                         
+                        Client.sharedInstance().sessionID = result as? String
+                        self.completeLogin()
+                        
+                        
                     }
                 }
+                
             }
+            
         } else {
             
             let alertTitle = "No Internet Connection"
             let alertMessage = "Make sure your device is connected to the internet"
             let actionTitle = "OK"
-            self.showAlert(alertTitle, alertMessage: alertMessage, actionTitle: actionTitle)
+            showAlert(alertTitle, alertMessage: alertMessage, actionTitle: actionTitle)
             
         }
     }
+    
     
     // Action Functions
     
@@ -104,7 +119,12 @@ class LogInViewController: UIViewController, UITextFieldDelegate{
     
     func completeLogin() {
         
-        performSegueWithIdentifier("TabBarController", sender: nil)
+        performUIUpdatesOnMain {
+            
+            self.performSegueWithIdentifier("TabBarController", sender: nil)
+            
+        }
+        
         
     }
     

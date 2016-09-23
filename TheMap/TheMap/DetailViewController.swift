@@ -140,15 +140,15 @@ class DetailViewController: UIViewController,MKMapViewDelegate, UITextFieldDeleg
             return
         }
         
-        guard  UIApplication.sharedApplication().canOpenURL(NSURL(string: mediaURL.text!)!) else {
+      /*  guard  UIApplication.sharedApplication().canOpenURL(NSURL(string: mediaURL.text!)!) else {
             let alertTitle = "Invalid URL"
             let alertMessage = "You must enter a valid URL. Ensure you include http:// or https://"
             let actionTitle = "OK"
             self.showAlert(alertTitle, alertMessage: alertMessage, actionTitle: actionTitle)
             return
-        }
+        } */
         
-        client.getUserdata { (success, error) in
+        client.getUserdata(mediaURL.text!) { (success, error) in
             
             if success {
                 
@@ -199,7 +199,7 @@ class DetailViewController: UIViewController,MKMapViewDelegate, UITextFieldDeleg
     
     func postStudentLocation() {
         
-        ParseClient.sharedInstance().postStudentLocations{ (success, error) in
+        ParseClient.sharedInstance().postStudentLocations(udacityLoggedInUser.userId, firstName: udacityLoggedInUser.firstName, lastName: udacityLoggedInUser.lastName, mediaURL: mediaURL.text!, mapString: mapString.text!){ (success, error) in
             
           if success {
             
