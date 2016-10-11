@@ -73,8 +73,7 @@ class LogInViewController: UIViewController, UITextFieldDelegate{
                         
                         return
                         }
-                         
-                        Client.sharedInstance().sessionID = result as? String
+                    
                         self.completeLogin()
                 }
                 

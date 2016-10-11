@@ -14,14 +14,15 @@ class Client: NSObject {
     
     /* Authentication state */
     var sessionID: String? = nil
-    var userID: Int? = nil
     var studentLocations = [StudentLocation]()
+    var userID : Int? = nil
     
     /* Initializer */
     override init() {
         session = NSURLSession.sharedSession()
         super.init()
     }
+    
     
     /* Get */
     
@@ -39,7 +40,42 @@ class Client: NSObject {
             } else {
                 let newData = data!.subdataWithRange(NSMakeRange(5, data!.length - 5))
                 CompletionHandler(result: newData, error: nil)
-                 Client.parseJSONWithCompletionHandler(newData, completionHandler: CompletionHandler)
+                Client.parseJSONWithCompletionHandler(newData) { (result, error) in
+                    
+                    let userInfo = [NSLocalizedDescriptionKey: "There was an error with your request"]
+                    
+                    if let result = result {
+                        
+                        let data = result["user"] as? [String: AnyObject]
+                        
+                        if let data = data {
+                            
+                            if let firstName = (data["first_name"] as? String), lastName = (data["last_name"] as? String){
+                                
+                                let dic:[String: AnyObject] = ["firstName": firstName, "lastName":lastName]
+                                
+                                CompletionHandler(result: dic, error: error)
+                                
+                            } else {
+                                
+                                CompletionHandler(result: nil, error: NSError(domain: "Unable to get user's name", code: 1, userInfo: userInfo))
+                                
+                            }
+                            
+                        } else {
+                            
+                            CompletionHandler(result: nil, error: NSError(domain: "Unable to get user data", code: 1, userInfo: userInfo))
+                        }
+                        
+                    } else {
+                        
+                        CompletionHandler(result: nil, error: NSError(domain: "Unable to parse data", code: 1, userInfo: userInfo))
+                    }
+
+                    
+                }
+                    
+                    
             }
             /* subset response data! */
             //print(NSString(data: newData, encoding: NSUTF8StringEncoding))
@@ -328,8 +364,11 @@ class Client: NSObject {
         var parsedResult: AnyObject!
         do {
             parsedResult = try NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.AllowFragments)
-        } catch {
+            
+                   } catch {
+            
             let userInfo = [NSLocalizedDescriptionKey: "Could not parse the data as JSON: '\(data)'"]
+            
             completionHandler(result: nil, error: NSError(domain: "parseJSONWithCompletionHandler", code: 1, userInfo: userInfo))
         }
         completionHandler(result: parsedResult, error: nil)
