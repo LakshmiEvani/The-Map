@@ -420,7 +420,7 @@ Cg
         <!--Tab Bar Controller-->
         <scene sceneID="UDk-49-JFr">
             <objects>
-                <tabBarController id="BMg-ru-Hmf" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="TabBarController" id="BMg-ru-Hmf" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" id="djt-2v-63s">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>

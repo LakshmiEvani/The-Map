@@ -39,10 +39,11 @@ class Client: NSObject {
                 CompletionHandler(result: nil, error: error)
             } else {
                 let newData = data!.subdataWithRange(NSMakeRange(5, data!.length - 5))
-                CompletionHandler(result: newData, error: nil)
+                
+
                 Client.parseJSONWithCompletionHandler(newData) { (result, error) in
                     
-                    let userInfo = [NSLocalizedDescriptionKey: "There was an error with your request"]
+                    let userInfo = [NSLocalizedDescriptionKey: "Could not parse the data as JSON: '\(data)'"]
                     
                     if let result = result {
                         

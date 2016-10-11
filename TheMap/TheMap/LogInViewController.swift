@@ -73,8 +73,22 @@ class LogInViewController: UIViewController, UITextFieldDelegate{
                         
                         return
                         }
-                    
-                        self.completeLogin()
+                    ParseClient.sharedInstance().getStudentLocations() { (result, error) in
+                        
+                        if error != nil {
+                            
+                            self.completeLogin()
+                            
+                        } else {
+                            
+                            let alertTitle = "Invalid student information"
+                            let alertMessage = "Please enter a valid student information"
+                            let actionTitle = "OK"
+                            self.showAlert(alertTitle, alertMessage: alertMessage, actionTitle: actionTitle)
+                            
+                        }
+                        
+                    }
                 }
                 
             }

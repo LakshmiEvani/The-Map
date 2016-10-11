@@ -92,7 +92,7 @@ class DetailViewController: UIViewController,MKMapViewDelegate, UITextFieldDeleg
             /* Geocode the provided string */
             geocoder.geocodeAddressString(stringToGeocode) { (placemark, error) in
                 
-    
+                
                 
                 guard error == nil else {
                     
@@ -112,7 +112,7 @@ class DetailViewController: UIViewController,MKMapViewDelegate, UITextFieldDeleg
                 /* Assign the returned location to the userLocation property */
                 self.userLocation = placemark!
                 
-               
+                
                 /* Setup the map with the pin coresponding to placemark */
                 self.configureMap()
                 
@@ -130,46 +130,57 @@ class DetailViewController: UIViewController,MKMapViewDelegate, UITextFieldDeleg
     
     @IBAction func submitStudentLocation(sender: AnyObject) {
         
-        
-        guard mediaURL.text != nil else {
+        if Reachability.isConnectedToNetwork() == true {
             
-            let alertTitle = "No URL"
-            let alertMessage = "Please enter a url"
-            let actionTitle = "OK"
-            showAlert(alertTitle, alertMessage: alertMessage, actionTitle: actionTitle)
-            return
-        }
-        
-       /*guard  UIApplication.sharedApplication().canOpenURL(NSURL(string: mediaURL.text!)!) else {
+            
+            guard mediaURL.text != nil else {
+                
+                let alertTitle = "No URL"
+                let alertMessage = "Please enter a url"
+                let actionTitle = "OK"
+                showAlert(alertTitle, alertMessage: alertMessage, actionTitle: actionTitle)
+                return
+            }
+            
+            /*guard  UIApplication.sharedApplication().canOpenURL(NSURL(string: mediaURL.text!)!) else {
             let alertTitle = "Invalid URL"
             let alertMessage = "You must enter a valid URL. Ensure you include http:// or https://"
             let actionTitle = "OK"
             self.showAlert(alertTitle, alertMessage: alertMessage, actionTitle: actionTitle)
             return
-        }*/
-        
-        self.postStudentLocation()
-        
-     /*   client.getUserdata(mediaURL.text!) { (success, error) in
+            }*/
+            
+            self.postStudentLocation()
+            
+            /*   client.getUserdata(mediaURL.text!) { (success, error) in
             
             if success {
-                
             
-                
+            
+            
             } else {
-                
-                performUIUpdatesOnMain {
-                    
-                    let alertTitle = "Couldn't submit your location"
-                    let alertMessage = "There was an error while trying to post your location to the server."
-                    let actionTitle = "Try again"
-                    
-                    self.showAlert(alertTitle, alertMessage: alertMessage, actionTitle: actionTitle)
-                    
-                }
+            
+            performUIUpdatesOnMain {
+            
+            let alertTitle = "Couldn't submit your location"
+            let alertMessage = "There was an error while trying to post your location to the server."
+            let actionTitle = "Try again"
+            
+            self.showAlert(alertTitle, alertMessage: alertMessage, actionTitle: actionTitle)
+            
             }
-        }*/
+            }
+            }*/
+        } else {
+            
+            let alertTitle = "No Internet Connection"
+            let alertMessage = "Make sure your device is connected to the internet"
+            let actionTitle = "OK"
+            showAlert(alertTitle, alertMessage: alertMessage, actionTitle: actionTitle)
+            
+        }
     }
+    
     
     // Help Fuctions
     
@@ -202,36 +213,38 @@ class DetailViewController: UIViewController,MKMapViewDelegate, UITextFieldDeleg
     func postStudentLocation() {
         
         ParseClient.sharedInstance().postStudentLocations(udacityLoggedInUser.userId, firstName: udacityLoggedInUser.firstName, lastName: udacityLoggedInUser.lastName, mediaURL: mediaURL.text!, mapString: mapString.text!, longitude: studentLat, latitude: studentLon) { (success, error) in
-        
-          if success {
             
-            performUIUpdatesOnMain{
+            
+            if success {
                 
-                let tabViews = self.storyboard!.instantiateViewControllerWithIdentifier("MapTabBarController") as! UITabBarController
-                self.presentViewController(tabViews, animated: false, completion: nil)
+                performUIUpdatesOnMain {
                 
-            }   } else {
-            
-            let alertTitle = "Couldn't submit your location"
-            let alertMessage = "There was an error while trying to post your location to the server."
-            let actionTitle = "Try again"
-            
-            performUIUpdatesOnMain {
-                self.showAlert(alertTitle, alertMessage: alertMessage, actionTitle: actionTitle)
-                self.dismissViewControllerAnimated(true, completion: nil)
-                self.cancelButton.hidden = false
+                    let tabviews = self.storyboard!.instantiateViewControllerWithIdentifier("TabBarController") as!UITabBarController
+                    self.presentViewController(tabviews, animated: false, completion: nil)
+                
+               
+                }
+                
+            } else {
+                
+                
+                performUIUpdatesOnMain {
+                    
+                    let alertTitle = "Couldn't submit your location"
+                    let alertMessage = "There was an error while trying to post your location to the server."
+                    let actionTitle = "Try again"
+                    
+                    self.showAlert(alertTitle, alertMessage: alertMessage, actionTitle: actionTitle)
+                    self.dismissViewControllerAnimated(true, completion: nil)
+                }
             }
             
-            return
-            }
             
-            }
-
         }
+    }
     
     
-
-
+    
     // Configure UI
     
     
