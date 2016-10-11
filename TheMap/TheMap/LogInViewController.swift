@@ -73,22 +73,12 @@ class LogInViewController: UIViewController, UITextFieldDelegate{
                         
                         return
                         }
-                    ParseClient.sharedInstance().getStudentLocations() { (result, error) in
+                    performUIUpdatesOnMain {
                         
-                        if error != nil {
-                            
-                            self.completeLogin()
-                            
-                        } else {
-                            
-                            let alertTitle = "Invalid student information"
-                            let alertMessage = "Please enter a valid student information"
-                            let actionTitle = "OK"
-                            self.showAlert(alertTitle, alertMessage: alertMessage, actionTitle: actionTitle)
-                            
-                        }
+                        self.completeLogin()
                         
                     }
+                    
                 }
                 
             }
@@ -133,7 +123,7 @@ class LogInViewController: UIViewController, UITextFieldDelegate{
         
         performUIUpdatesOnMain {
             
-            self.performSegueWithIdentifier("TabBarController", sender: nil)
+            self.performSegueWithIdentifier("MapTabBarController", sender: nil)
             
         }
         

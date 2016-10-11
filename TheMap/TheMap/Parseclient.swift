@@ -64,6 +64,7 @@ class ParseClient : NSObject {
         task.resume()
         
     }
+    
     func postStudentLocations(userId: String, firstName: String, lastName: String, mediaURL: String, mapString: String, longitude long: Double, latitude lat: Double,  completionHandler: (success: Bool,error: NSError?)  -> Void) {
         
         let request = NSMutableURLRequest(URL: NSURL(string: "https://parse.udacity.com/parse/classes/StudentLocation")!)
@@ -115,7 +116,7 @@ class ParseClient : NSObject {
     
     
     
-    func updateStudentLocation(parameters: String, jsonBody: [String:AnyObject], completionHandler: (success: Bool,error: NSError?) -> Void) {
+    func updateStudentLocation(objectID: String, mediaURL: String, studentLocation: StudentLocation, completionHandler: (success: Bool,error: NSError?) -> Void) {
         
         let urlString = "https://parse.udacity.com/parse/classes/StudentLocation/8ZExGR5uX8"
         let url = NSURL(string: urlString)
@@ -124,7 +125,7 @@ class ParseClient : NSObject {
         request.addValue("QrX47CA9cyuGewLdsL7o5Eb8iug6Em8ye0dnAbIr", forHTTPHeaderField: "X-Parse-Application-Id")
         request.addValue("QuWThTdiRmTux3YaDseUSEpUKo7aBYM737yKd4gY", forHTTPHeaderField: "X-Parse-REST-API-Key")
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.HTTPBody = "{\"uniqueKey\": \"1234\", \"firstName\": \"John\", \"lastName\": \"Doe\",\"mapString\": \"Cupertino, CA\", \"mediaURL\": \"https://udacity.com\",\"latitude\": 37.322998, \"longitude\": -122.032182}".dataUsingEncoding(NSUTF8StringEncoding)
+        request.HTTPBody = "{\"uniqueKey\": \"\(studentLocation.uniqueKey)\", \"firstName\": \" \(studentLocation.firstName)\", \"lastName\": \(studentLocation.lastName)\",\"mapString\": \"\(studentLocation.mapString)\", \"mediaURL\": \"\(mediaURL)\",\"latitude\": \"\(studentLocation.latitude)\", \"longitude\":\"\(studentLocation.longitude)\"}".dataUsingEncoding(NSUTF8StringEncoding)
         let session = NSURLSession.sharedSession()
         let task = session.dataTaskWithRequest(request) { data, response, error in
             if error != nil { // Handle error…

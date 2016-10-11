@@ -40,7 +40,7 @@ class Client: NSObject {
             } else {
                 let newData = data!.subdataWithRange(NSMakeRange(5, data!.length - 5))
                 
-
+                
                 Client.parseJSONWithCompletionHandler(newData) { (result, error) in
                     
                     let userInfo = [NSLocalizedDescriptionKey: "Could not parse the data as JSON: '\(data)'"]
@@ -72,11 +72,11 @@ class Client: NSObject {
                         
                         CompletionHandler(result: nil, error: NSError(domain: "Unable to parse data", code: 1, userInfo: userInfo))
                     }
-
+                    
                     
                 }
-                    
-                    
+                
+                
             }
             /* subset response data! */
             //print(NSString(data: newData, encoding: NSUTF8StringEncoding))
@@ -133,31 +133,27 @@ class Client: NSObject {
             } else {
                 
                 let newData = data!.subdataWithRange(NSMakeRange(5, data!.length - 5)) /* subset response data! */
-             
+                
                 
                 do {
                     
                     let result = try NSJSONSerialization.JSONObjectWithData(newData,options: NSJSONReadingOptions.AllowFragments) as! NSDictionary
                     
-                    ParseClient.sharedInstance().updateStudentLocation(uniqueKey, jsonBody: result as! [String : AnyObject]) { (success, error) in
-                        
-                        
                     if let results = result["results"] as? [[String: AnyObject]] {
                         
                         
                         self.studentLocations = StudentLocation.locationsFromDictionaries(results)
                         StudentInformation.sharedInstance().studentLocation = self.studentLocations
                         completionHandler(success: true, error: nil)
-                    
+                        
                         
                     } else {
                         
                         completionHandler(success: false, error: error)
                     }
-                }
                     
                 }
-                
+                    
                 catch { completionHandler(success: false, error: NSError(domain: "getStudentLocations", code: 0, userInfo:  [NSLocalizedDescriptionKey: "No records found"])) }
                 
                 
@@ -366,7 +362,7 @@ class Client: NSObject {
         do {
             parsedResult = try NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.AllowFragments)
             
-                   } catch {
+        } catch {
             
             let userInfo = [NSLocalizedDescriptionKey: "Could not parse the data as JSON: '\(data)'"]
             
