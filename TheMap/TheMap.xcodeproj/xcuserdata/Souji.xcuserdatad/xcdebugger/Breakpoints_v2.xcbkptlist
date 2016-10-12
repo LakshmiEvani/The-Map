@@ -613,11 +613,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TheMap/Client.swift"
-            timestampString = "497906717.44634"
+            timestampString = "497975793.334321"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "159"
-            endingLineNumber = "159"
+            startingLineNumber = "160"
+            endingLineNumber = "160"
             landmarkName = "getUserdata(_:completionHandler:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -645,11 +645,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TheMap/DetailViewController.swift"
-            timestampString = "497887895.250232"
+            timestampString = "497975793.334321"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "155"
-            endingLineNumber = "155"
+            startingLineNumber = "147"
+            endingLineNumber = "147"
             landmarkName = "submitStudentLocation(_:)"
             landmarkType = "5">
             <Locations>
@@ -693,11 +693,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TheMap/DetailViewController.swift"
-            timestampString = "497887895.250232"
+            timestampString = "497975793.334321"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "184"
-            endingLineNumber = "184"
+            startingLineNumber = "158"
+            endingLineNumber = "158"
             landmarkName = "DetailViewController"
             landmarkType = "3">
          </BreakpointContent>

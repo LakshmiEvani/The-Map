@@ -142,35 +142,9 @@ class DetailViewController: UIViewController,MKMapViewDelegate, UITextFieldDeleg
                 return
             }
             
-            /*guard  UIApplication.sharedApplication().canOpenURL(NSURL(string: mediaURL.text!)!) else {
-            let alertTitle = "Invalid URL"
-            let alertMessage = "You must enter a valid URL. Ensure you include http:// or https://"
-            let actionTitle = "OK"
-            self.showAlert(alertTitle, alertMessage: alertMessage, actionTitle: actionTitle)
-            return
-            }*/
-            
             self.postStudentLocation()
             
-            /*   client.getUserdata(mediaURL.text!) { (success, error) in
             
-            if success {
-            
-            
-            
-            } else {
-            
-            performUIUpdatesOnMain {
-            
-            let alertTitle = "Couldn't submit your location"
-            let alertMessage = "There was an error while trying to post your location to the server."
-            let actionTitle = "Try again"
-            
-            self.showAlert(alertTitle, alertMessage: alertMessage, actionTitle: actionTitle)
-            
-            }
-            }
-            }*/
         } else {
             
             let alertTitle = "No Internet Connection"

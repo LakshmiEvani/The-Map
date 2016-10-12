@@ -34,17 +34,22 @@ class Client: NSObject {
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.HTTPBody = "{\"udacity\": {\"username\": \"\(username)\", \"password\": \"\(password)\"}}".dataUsingEncoding(NSUTF8StringEncoding)
         let session = NSURLSession.sharedSession()
+       
         let task = session.dataTaskWithRequest(request) { data, response, error in
+          
             if error != nil { // Handle error
                 CompletionHandler(result: nil, error: error)
+                
             } else {
+                 let userInfo = [NSLocalizedDescriptionKey: "Could not parse the data as JSON: '\(data)'"]
+                
                 let newData = data!.subdataWithRange(NSMakeRange(5, data!.length - 5))
                 
-                
+        
                 Client.parseJSONWithCompletionHandler(newData) { (result, error) in
                     
-                    let userInfo = [NSLocalizedDescriptionKey: "Could not parse the data as JSON: '\(data)'"]
-                    
+                   
+                
                     if let result = result {
                         
                         let data = result["user"] as? [String: AnyObject]
@@ -72,11 +77,11 @@ class Client: NSObject {
                         
                         CompletionHandler(result: nil, error: NSError(domain: "Unable to parse data", code: 1, userInfo: userInfo))
                     }
-                    
+
                     
                 }
-                
-                
+                    
+                    
             }
             /* subset response data! */
             //print(NSString(data: newData, encoding: NSUTF8StringEncoding))
@@ -133,7 +138,7 @@ class Client: NSObject {
             } else {
                 
                 let newData = data!.subdataWithRange(NSMakeRange(5, data!.length - 5)) /* subset response data! */
-                
+             
                 
                 do {
                     
@@ -145,15 +150,16 @@ class Client: NSObject {
                         self.studentLocations = StudentLocation.locationsFromDictionaries(results)
                         StudentInformation.sharedInstance().studentLocation = self.studentLocations
                         completionHandler(success: true, error: nil)
-                        
+                    
                         
                     } else {
                         
                         completionHandler(success: false, error: error)
                     }
+
                     
                 }
-                    
+                
                 catch { completionHandler(success: false, error: NSError(domain: "getStudentLocations", code: 0, userInfo:  [NSLocalizedDescriptionKey: "No records found"])) }
                 
                 
@@ -362,7 +368,7 @@ class Client: NSObject {
         do {
             parsedResult = try NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.AllowFragments)
             
-        } catch {
+                   } catch {
             
             let userInfo = [NSLocalizedDescriptionKey: "Could not parse the data as JSON: '\(data)'"]
             
