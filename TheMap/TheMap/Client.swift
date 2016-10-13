@@ -51,11 +51,11 @@ class Client: NSObject {
         
                     if let result = result {
                         
-                        let data = result["user"] as? [String: AnyObject]
+                        let data = result["Key"] as? [String: AnyObject]
                         
                         if let data = data {
                             
-                            if let firstName = (data["first_name"] as? String), lastName = (data["last_name"] as? String){
+                            if let firstName = (data["firs_tname"] as? String), lastName = (data["last_name"] as? String){
                                 
                                 let dic:[String: AnyObject] = ["firstName": firstName, "lastName":lastName]
                                 
@@ -367,7 +367,7 @@ class Client: NSObject {
         do {
             parsedResult = try NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.AllowFragments)
             
-                   } catch {
+            } catch {
             
             let userInfo = [NSLocalizedDescriptionKey: "Could not parse the data as JSON: '\(data)'"]
             
