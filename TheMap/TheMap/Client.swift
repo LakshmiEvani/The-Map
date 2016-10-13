@@ -41,15 +41,14 @@ class Client: NSObject {
                 CompletionHandler(result: nil, error: error)
                 
             } else {
-                 let userInfo = [NSLocalizedDescriptionKey: "Could not parse the data as JSON: '\(data)'"]
                 
                 let newData = data!.subdataWithRange(NSMakeRange(5, data!.length - 5))
                 
-        
+                let userInfo = [NSLocalizedDescriptionKey: "Could not parse the data as JSON: '\(data)'"]
+
                 Client.parseJSONWithCompletionHandler(newData) { (result, error) in
                     
-                   
-                
+        
                     if let result = result {
                         
                         let data = result["user"] as? [String: AnyObject]
