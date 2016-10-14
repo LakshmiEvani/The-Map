@@ -56,7 +56,6 @@
                                         </state>
                                         <connections>
                                             <action selector="logInButtonAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="mId-em-Qho"/>
-                                            <segue destination="BMg-ru-Hmf" kind="modal" identifier="TabBarController" id="A3L-i1-ECx"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="D3K-Uj-Ruh">
@@ -123,6 +122,7 @@
                         <outlet property="logInButton" destination="dTy-Lg-MLa" id="oIs-wS-cPV"/>
                         <outlet property="passWord" destination="aW1-Ff-we6" id="AC3-gO-vct"/>
                         <outlet property="signUpButton" destination="D3K-Uj-Ruh" id="Fjt-H4-rLl"/>
+                        <segue destination="BMg-ru-Hmf" kind="modal" identifier="MapTabBarController" id="TTw-7g-VxH"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -201,7 +201,11 @@
                             </connections>
                         </barButtonItem>
                         <rightBarButtonItems>
-                            <barButtonItem systemItem="refresh" id="0EB-Xd-VDY"/>
+                            <barButtonItem systemItem="refresh" id="0EB-Xd-VDY">
+                                <connections>
+                                    <action selector="refreshButtonPressed:" destination="HKO-vn-GSb" id="nQ0-8G-LnP"/>
+                                </connections>
+                            </barButtonItem>
                             <barButtonItem image="pin" id="3Rx-0q-tNq">
                                 <connections>
                                     <segue destination="Sex-ga-A4q" kind="modal" id="jmo-wd-Cem"/>
@@ -224,6 +228,9 @@
                     <mapView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" id="sFH-hr-heb">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <connections>
+                            <outlet property="delegate" destination="TVt-53-k2I" id="94n-Pq-fMZ"/>
+                        </connections>
                     </mapView>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="On The Map" id="DKE-xc-eoZ">
@@ -240,7 +247,7 @@
                             </barButtonItem>
                             <barButtonItem image="pin" id="H0C-ZH-cKu">
                                 <connections>
-                                    <segue destination="Sex-ga-A4q" kind="modal" id="Cew-oO-6TJ"/>
+                                    <segue destination="Sex-ga-A4q" kind="modal" id="Prj-ik-WVZ"/>
                                 </connections>
                             </barButtonItem>
                         </rightBarButtonItems>
@@ -420,7 +427,7 @@ Cg
         <!--Tab Bar Controller-->
         <scene sceneID="UDk-49-JFr">
             <objects>
-                <tabBarController storyboardIdentifier="MapTabBarController" id="BMg-ru-Hmf" sceneMemberID="viewController">
+                <tabBarController id="BMg-ru-Hmf" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" id="djt-2v-63s">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -496,6 +503,6 @@ Cg
         <image name="pin" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Cew-oO-6TJ"/>
+        <segue reference="jmo-wd-Cem"/>
     </inferredMetricsTieBreakers>
 </document>

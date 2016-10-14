@@ -15,7 +15,8 @@ class Client: NSObject {
     /* Authentication state */
     var sessionID: String? = nil
     var studentLocations = [StudentLocation]()
-    var userID : Int? = nil
+    var userID : String? = nil
+    
     
     /* Initializer */
     override init() {
@@ -34,59 +35,53 @@ class Client: NSObject {
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.HTTPBody = "{\"udacity\": {\"username\": \"\(username)\", \"password\": \"\(password)\"}}".dataUsingEncoding(NSUTF8StringEncoding)
         let session = NSURLSession.sharedSession()
-       
+        
         let task = session.dataTaskWithRequest(request) { data, response, error in
-          
+            
             if error != nil { // Handle error
                 CompletionHandler(result: nil, error: error)
                 
             } else {
                 
+                
                 let newData = data!.subdataWithRange(NSMakeRange(5, data!.length - 5))
                 
-                let userInfo = [NSLocalizedDescriptionKey: "Could not parse the data as JSON: '\(data)'"]
-
-                Client.parseJSONWithCompletionHandler(newData) { (result, error) in
+                
+                Client.parseJSONWithCompletionHandler(newData) { (result,error) in
                     
-        
-                    if let result = result {
+                    let parsedResult = result
+                    
+                    let accountInfo = parsedResult!["account"] as? NSDictionary
+                    let userInfo = accountInfo!["key"] as? String
+                    let jsonSession = parsedResult!["session"] as? NSDictionary
+                    let sessionID = jsonSession!["id"] as? String
+                    
+                    self.sessionID = sessionID
+                    self.userID = userInfo
+                    
+                    print("The session_id is: ", sessionID)
+                    print("The userId is: ",userInfo)
+                    self.getUserdata(self.userID!) { (success, error) in
                         
-                        let data = result["Key"] as? [String: AnyObject]
+                        let userInfo = [NSLocalizedDescriptionKey: "There was an error with your request: \(error)"]
                         
-                        if let data = data {
+                        guard error != nil else {
                             
-                            if let firstName = (data["firs_tname"] as? String), lastName = (data["last_name"] as? String){
-                                
-                                let dic:[String: AnyObject] = ["firstName": firstName, "lastName":lastName]
-                                
-                                CompletionHandler(result: dic, error: error)
-                                
-                            } else {
-                                
-                                CompletionHandler(result: nil, error: NSError(domain: "Unable to get user's name", code: 1, userInfo: userInfo))
-                                
-                            }
-                            
-                        } else {
-                            
-                            CompletionHandler(result: nil, error: NSError(domain: "Unable to get user data", code: 1, userInfo: userInfo))
+                            CompletionHandler(result: nil, error: NSError(domain: "Invalid credentials", code: 1, userInfo: userInfo ))
+                            return
                         }
                         
-                    } else {
                         
-                        CompletionHandler(result: nil, error: NSError(domain: "Unable to parse data", code: 1, userInfo: userInfo))
                     }
-
                     
                 }
-                    
-                    
             }
+            
+            
             /* subset response data! */
             //print(NSString(data: newData, encoding: NSUTF8StringEncoding))
             
         }
-        
         task.resume()
         
         return task
@@ -125,7 +120,7 @@ class Client: NSObject {
     
     func getUserdata(uniqueKey: String, completionHandler:(success: Bool, error: NSError?) -> Void) -> NSURLSessionDataTask {
         
-        let request = NSMutableURLRequest(URL: NSURL(string: "https://www.udacity.com/api/users/3903878747")!)
+        let request = NSMutableURLRequest(URL: NSURL(string: "https://www.udacity.com/api/users/5404309077")!)
         let session = NSURLSession.sharedSession()
         
         let task = session.dataTaskWithRequest(request) { data, response, error in
@@ -137,29 +132,23 @@ class Client: NSObject {
             } else {
                 
                 let newData = data!.subdataWithRange(NSMakeRange(5, data!.length - 5)) /* subset response data! */
-             
+                
                 
                 do {
                     
                     let result = try NSJSONSerialization.JSONObjectWithData(newData,options: NSJSONReadingOptions.AllowFragments) as! NSDictionary
                     
-                    if let results = result["results"] as? [[String: AnyObject]] {
-                        
-                        
-                        self.studentLocations = StudentLocation.locationsFromDictionaries(results)
-                        StudentInformation.sharedInstance().studentLocation = self.studentLocations
-                        completionHandler(success: true, error: nil)
+                    // login succeeded, parse the data
+                    let userData = result["user"] as! NSDictionary
+                    let firstName = userData["first_name"] as! String
+                    let lastName = userData["last_name"] as! String
+                    udacityLoggedInUser.firstName = firstName
+                    udacityLoggedInUser.lastName = lastName
                     
-                        
-                    } else {
-                        
-                        completionHandler(success: false, error: error)
-                    }
-
+                    completionHandler(success: true, error: nil)
                     
-                }
-                
-                catch { completionHandler(success: false, error: NSError(domain: "getStudentLocations", code: 0, userInfo:  [NSLocalizedDescriptionKey: "No records found"])) }
+                    
+                } catch { completionHandler(success: false, error: NSError(domain: "getStudentLocations", code: 0, userInfo:  [NSLocalizedDescriptionKey: "No records found"])) }
                 
                 
             }
@@ -367,7 +356,7 @@ class Client: NSObject {
         do {
             parsedResult = try NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.AllowFragments)
             
-            } catch {
+        } catch {
             
             let userInfo = [NSLocalizedDescriptionKey: "Could not parse the data as JSON: '\(data)'"]
             
@@ -384,7 +373,6 @@ class Client: NSObject {
         }
         return Singleton.sharedInstance
     }
-    
     
 }
 

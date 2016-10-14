@@ -64,7 +64,7 @@ class LogInViewController: UIViewController, UITextFieldDelegate{
                 client.udacityLogIn(email.text!, password: passWord.text!) { (result, error) in
                     
                     
-                       guard error == nil else {
+                       guard error != nil else {
                         
                             let alertTitle = "Invalid username or password"
                             let alertMessage = "Please enter a valid username and password"

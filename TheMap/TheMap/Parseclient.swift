@@ -29,11 +29,9 @@ class ParseClient : NSObject {
     }
     
     
-    
     func getStudentLocations(completionHandler: (result: [StudentLocation]?,error: NSError?) -> Void) {
         
-        
-        let urlString = "https://parse.udacity.com/parse/classes/StudentLocation"
+        let urlString = "https://parse.udacity.com/parse/classes/StudentLocationation?where=%7B%22uniqueKey%22%3A%221234%22%7D"
         let url = NSURL(string: urlString)
         let request = NSMutableURLRequest(URL: url!)
         request.addValue("QrX47CA9cyuGewLdsL7o5Eb8iug6Em8ye0dnAbIr", forHTTPHeaderField: "X-Parse-Application-Id")
