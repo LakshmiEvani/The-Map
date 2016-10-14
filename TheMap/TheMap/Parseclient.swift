@@ -31,7 +31,7 @@ class ParseClient : NSObject {
     
     func getStudentLocations(completionHandler: (result: [StudentLocation]?,error: NSError?) -> Void) {
         
-        let urlString = "https://parse.udacity.com/parse/classes/StudentLocationation?where=%7B%22uniqueKey%22%3A%221234%22%7D"
+        let urlString = "https://parse.udacity.com/parse/classes/StudentLocation"
         let url = NSURL(string: urlString)
         let request = NSMutableURLRequest(URL: url!)
         request.addValue("QrX47CA9cyuGewLdsL7o5Eb8iug6Em8ye0dnAbIr", forHTTPHeaderField: "X-Parse-Application-Id")
@@ -46,9 +46,11 @@ class ParseClient : NSObject {
             
             if let results = parsedResult["results"] as? [[String: AnyObject]] {
                 
+                
+                    self.studentLocations = StudentLocation.locationsFromDictionaries(results)
+                    StudentInformation.sharedInstance().studentLocation = self.studentLocations
 
-                self.studentLocations = StudentLocation.locationsFromDictionaries(results)
-                StudentInformation.sharedInstance().studentLocation = self.studentLocations
+                
                 completionHandler(result: self.studentLocations , error: nil)
             
                 
