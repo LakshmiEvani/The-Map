@@ -28,16 +28,16 @@ struct StudentLocation {
         let dateFormatter = NSDateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
         
-        self.firstName = students[ParseClient.JSONResponseKeys.FirstName] as? String
-        self.lastName = students[ParseClient.JSONResponseKeys.LastName] as? String
-        self.latitude = students[ParseClient.JSONResponseKeys.Latitude] as? Double
-        self.longitude = students[ParseClient.JSONResponseKeys.Longitude] as? Double
-        self.mapString = students[ParseClient.JSONResponseKeys.MapString] as? String
-        self.mediaURL = students[ParseClient.JSONResponseKeys.MediaURL] as? String
-        self.objectId = students[ParseClient.JSONResponseKeys.ObjectID] as? String
-        self.uniqueKey = students[ParseClient.JSONResponseKeys.UniqueKey] as! String?
-        self.createdAt = dateFormatter.dateFromString((students[ParseClient.JSONResponseKeys.CreatedAt] as? String)!)!
-        self.updatedAt = dateFormatter.dateFromString((students[ParseClient.JSONResponseKeys.UpdatedAt] as? String)!)!
+        self.firstName = students[Parseclient.JSONResponseKeys.FirstName] as? String
+        self.lastName = students[Parseclient.JSONResponseKeys.LastName] as? String
+        self.latitude = students[Parseclient.JSONResponseKeys.Latitude] as? Double
+        self.longitude = students[Parseclient.JSONResponseKeys.Longitude] as? Double
+        self.mapString = students[Parseclient.JSONResponseKeys.MapString] as? String
+        self.mediaURL = students[Parseclient.JSONResponseKeys.MediaURL] as? String
+        self.objectId = students[Parseclient.JSONResponseKeys.ObjectID] as? String
+        self.uniqueKey = students[Parseclient.JSONResponseKeys.UniqueKey] as! String?
+        self.createdAt = dateFormatter.dateFromString((students[Parseclient.JSONResponseKeys.CreatedAt] as? String)!)!
+        self.updatedAt = dateFormatter.dateFromString((students[Parseclient.JSONResponseKeys.UpdatedAt] as? String)!)!
     }
     
     var coordinate: CLLocationCoordinate2D {

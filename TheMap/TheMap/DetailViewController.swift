@@ -186,7 +186,7 @@ class DetailViewController: UIViewController,MKMapViewDelegate, UITextFieldDeleg
     
     func postStudentLocation() {
         
-        ParseClient.sharedInstance().postStudentLocations(udacityLoggedInUser.userId, firstName: udacityLoggedInUser.firstName, lastName: udacityLoggedInUser.lastName, mediaURL: mediaURL.text!, mapString: mapString.text!, longitude: studentLat, latitude: studentLon) { (success, error) in
+        Parseclient.sharedInstance().postStudentLocations(UdacityLoggedInUser.userId, firstName: UdacityLoggedInUser.firstName, lastName: UdacityLoggedInUser.lastName, mediaURL: mediaURL.text!, mapString: mapString.text!, longitude: studentLat, latitude: studentLon) { (success, error) in
             
             
             if success {

@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-struct udacityLoggedInUser {
+struct UdacityLoggedInUser {
     
     static var firstName = ""
     static var lastName = ""

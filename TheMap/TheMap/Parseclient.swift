@@ -8,7 +8,7 @@
 
 import Foundation
 
-class ParseClient : NSObject {
+class Parseclient : NSObject {
     
     //MARK: -- Properties
     
@@ -25,7 +25,7 @@ class ParseClient : NSObject {
         
         session = NSURLSession.sharedSession()
         super.init()
-       
+        
     }
     
     
@@ -41,24 +41,24 @@ class ParseClient : NSObject {
             if error != nil { /* Handle error */
                 completionHandler(result: nil, error: error)
             }
-        
+            
             let parsedResult = try! NSJSONSerialization.JSONObjectWithData(data!,options: NSJSONReadingOptions.AllowFragments) as! NSDictionary
             
             if let results = parsedResult["results"] as? [[String: AnyObject]] {
                 
                 
-                    self.studentLocations = StudentLocation.locationsFromDictionaries(results)
-                    StudentInformation.sharedInstance().studentLocation = self.studentLocations
-
+                self.studentLocations = StudentLocation.locationsFromDictionaries(results)
+                StudentInformation.sharedInstance().studentLocation = self.studentLocations
+                
                 
                 completionHandler(result: self.studentLocations , error: nil)
-            
+                
                 
             } else {
                 
                 completionHandler(result: nil, error: NSError(domain: "getStudentLocations", code: 0, userInfo:  [NSLocalizedDescriptionKey: "No records found"]))
             }
-
+            
         }
         
         task.resume()
@@ -153,7 +153,7 @@ class ParseClient : NSObject {
         
         /* Set the parameters */
         if let parametersForURL = parameters {
-            urlString = Constants.ParseBaseSecureURL + method + ParseClient.escapedParameters(parametersForURL)
+            urlString = Constants.ParseBaseSecureURL + method + Parseclient.escapedParameters(parametersForURL)
         } else {
             urlString = Constants.ParseBaseSecureURL + method
         }
@@ -197,7 +197,7 @@ class ParseClient : NSObject {
             }
             
             /* Parse and use the data */
-            ParseClient.parseJSONWithCompletionHandler(data, completionHandler: completionHandler)
+            Parseclient.parseJSONWithCompletionHandler(data, completionHandler: completionHandler)
         }
         
         /* Start the request */
@@ -253,7 +253,7 @@ class ParseClient : NSObject {
             }
             
             /* Parse and use the data */
-            ParseClient.parseJSONWithCompletionHandler(data, completionHandler: completionHandler)
+            Parseclient.parseJSONWithCompletionHandler(data, completionHandler: completionHandler)
         }
         
         task.resume()
@@ -309,7 +309,7 @@ class ParseClient : NSObject {
             }
             
             /* Parse and use the data */
-            ParseClient.parseJSONWithCompletionHandler(data, completionHandler: completionHandler)
+            Parseclient.parseJSONWithCompletionHandler(data, completionHandler: completionHandler)
         }
         task.resume()
         return task
@@ -352,10 +352,10 @@ class ParseClient : NSObject {
     }
     
     /* Shared instance */
-    class func sharedInstance() -> ParseClient {
+    class func sharedInstance() -> Parseclient {
         
         struct Singleton {
-            static var sharedInstance = ParseClient()
+            static var sharedInstance = Parseclient()
         }
         return Singleton.sharedInstance
     }

@@ -21,7 +21,7 @@ class TableViewController: UITableViewController {
     
     var client =  Client.sharedInstance()
     
-    var parseClient = ParseClient.sharedInstance()
+    var parseClient = Parseclient.sharedInstance()
     
     // Life Cycle
     

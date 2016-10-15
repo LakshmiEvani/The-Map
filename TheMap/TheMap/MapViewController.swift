@@ -15,19 +15,13 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     
     @IBOutlet var mapView: MKMapView!
     
-    
-    
     // Properties
     var appDelegate: AppDelegate!
-    var parseClient =  ParseClient.sharedInstance()
+    var parseClient =  Parseclient.sharedInstance()
     var client = Client.sharedInstance()
     
     
     // Life Cycle
-    
-    
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -103,17 +97,17 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     
     @IBAction func refreshButtonPressed(sender: UIBarButtonItem) {
         
-         if Reachability.isConnectedToNetwork() == true {
+        if Reachability.isConnectedToNetwork() == true {
             
             mapView.reloadInputViews()
             
-         } else {
+        } else {
             
             let alertTitle = "No Internet Connection"
             let alertMessage = "Make sure your device is connected to the internet"
             let actionTitle = "OK"
-            self.showAlert(alertTitle, alertMessage: alertMessage, actionTitle: actionTitle)
-
+            showAlert(alertTitle, alertMessage: alertMessage, actionTitle: actionTitle)
+            
         }
     }
     
@@ -161,7 +155,11 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         let alert = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .Alert)
         alert.addAction(UIAlertAction(title: actionTitle, style: .Default, handler: nil))
         
-        self.presentViewController(alert, animated: true, completion: nil)
+        presentViewController(alert, animated: true, completion: nil)
     }
     
 }
+    
+    
+    
+    

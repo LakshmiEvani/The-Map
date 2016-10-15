@@ -43,7 +43,7 @@ class LogInViewController: UIViewController, UITextFieldDelegate{
     
     @IBAction func logInButtonAction(sender: AnyObject) {
         
-        if Reachability.isConnectedToNetwork() == true {
+        if Reachability.isConnectedToNetwork(){
             
             if email.text!.isEmpty {
                 
@@ -96,25 +96,13 @@ class LogInViewController: UIViewController, UITextFieldDelegate{
     
     // Action Functions
     
-    @IBAction func SignUPAction(sender: AnyObject) {
+    @IBAction func signUPAction(sender: AnyObject) {
         
         let url = NSURL(string: "https://www.udacity.com/account/auth#!/signup")!
         UIApplication.sharedApplication().openURL(url)
         
     }
-    
-    @IBAction func logInWithFaceBookAction(sender: AnyObject) {
-        
-        client.faceBookLogin { (success, error)  in
-            
-            performUIUpdatesOnMain{
-                
-                
-                
-            }
-        }
-        
-    }
+
     
     // Login
     

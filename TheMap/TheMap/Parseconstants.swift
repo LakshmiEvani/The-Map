@@ -7,7 +7,7 @@
 //
 
 import Foundation
-extension ParseClient {
+extension Parseclient {
     
     //Mark -- Constants
     struct Constants {

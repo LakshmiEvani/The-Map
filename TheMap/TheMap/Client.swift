@@ -143,8 +143,8 @@ class Client: NSObject {
                     let userData = result["user"] as! NSDictionary
                     let firstName = userData["first_name"] as! String
                     let lastName = userData["last_name"] as! String
-                    udacityLoggedInUser.firstName = firstName
-                    udacityLoggedInUser.lastName = lastName
+                    UdacityLoggedInUser.firstName = firstName
+                    UdacityLoggedInUser.lastName = lastName
                     
                     completionHandler(success: true, error: nil)
                     
@@ -158,33 +158,6 @@ class Client: NSObject {
         task.resume()
         return task
     }
-    
-    func faceBookLogin(completionHandler:(result: AnyObject!, error: NSError?) -> Void) -> NSURLSessionDataTask {
-        
-        let request = NSMutableURLRequest(URL: NSURL(string: "https://www.udacity.com/api/session")!)
-        request.HTTPMethod = "POST"
-        request.addValue("application/json", forHTTPHeaderField: "Accept")
-        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.HTTPBody = "{\"facebook_mobile\": {\"access_token\": \"DADFMS4SN9e8BAD6vMs6yWuEcrJlMZChFB0ZB0PCLZBY8FPFYxIPy1WOr402QurYWm7hj1ZCoeoXhAk2tekZBIddkYLAtwQ7PuTPGSERwH1DfZC5XSef3TQy1pyuAPBp5JJ364uFuGw6EDaxPZBIZBLg192U8vL7mZAzYUSJsZA8NxcqQgZCKdK4ZBA2l2ZA6Y1ZBWHifSM0slybL9xJm3ZBbTXSBZCMItjnZBH25irLhIvbxj01QmlKKP3iOnl8Ey;\"}}".dataUsingEncoding(NSUTF8StringEncoding)
-        let session = NSURLSession.sharedSession()
-        let task = session.dataTaskWithRequest(request) { data, response, error in
-            if error != nil {
-                
-                completionHandler(result: nil, error: error)
-                
-            } else {
-                
-                let newData = data!.subdataWithRange(NSMakeRange(5, data!.length - 5)) /* subset response data! */
-                completionHandler(result: newData, error: nil)
-                
-            }
-            
-            // println(NSString(data: newData, encoding: NSUTF8StringEncoding))
-        }
-        task.resume()
-        return task
-    }
-    
     
     func taskForGetMethod(method: String, completionHandler:(result: AnyObject!, error: NSError?) -> Void) -> NSURLSessionDataTask {
         

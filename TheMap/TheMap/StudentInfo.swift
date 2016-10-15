@@ -10,9 +10,8 @@ import Foundation
 
 class StudentInformation {
     
-    
     var studentLocation = [StudentLocation]()
-  
+    
     static func sharedInstance() -> StudentInformation {
         
         struct Singleton {
@@ -23,5 +22,5 @@ class StudentInformation {
         
     }
     
-    }
+}
 
