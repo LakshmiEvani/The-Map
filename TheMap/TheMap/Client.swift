@@ -26,7 +26,6 @@ class Client: NSObject {
     
     
     /* Get */
-    
     func udacityLogIn(username: String, password: String, CompletionHandler: (result: AnyObject!, error: NSError?) -> Void) -> NSURLSessionTask {
         
         let request = NSMutableURLRequest(URL: NSURL(string: "https://www.udacity.com/api/session")!)
@@ -49,31 +48,32 @@ class Client: NSObject {
                 
                 Client.parseJSONWithCompletionHandler(newData) { (result,error) in
                     
-                    let parsedResult = result
-                    
-                    let accountInfo = parsedResult!["account"] as? NSDictionary
-                    let userInfo = accountInfo!["key"] as? String
-                    let jsonSession = parsedResult!["session"] as? NSDictionary
-                    let sessionID = jsonSession!["id"] as? String
-                    
-                    self.sessionID = sessionID
-                    self.userID = userInfo
-                    
-                    print("The session_id is: ", sessionID)
-                    print("The userId is: ",userInfo)
-                    self.getUserdata(self.userID!) { (success, error) in
+                    guard error == nil else {
                         
                         let userInfo = [NSLocalizedDescriptionKey: "There was an error with your request: \(error)"]
-                        
-                        guard error != nil else {
-                            
-                            CompletionHandler(result: nil, error: NSError(domain: "Invalid credentials", code: 1, userInfo: userInfo ))
-                            return
-                        }
-                        
-                        
+                        CompletionHandler(result: nil, error: NSError(domain: "Invalid credentials", code: 1, userInfo: userInfo ))
+                        return
                     }
                     
+                    if let parsedResult = result {
+                        
+                        print("parsed Results:",parsedResult)
+                        let accountInfo = parsedResult["account"] as? NSDictionary
+                        let userInfo = accountInfo!["key"] as? String
+                        let jsonSession = parsedResult["session"] as? NSDictionary
+                        let sessionID = jsonSession!["id"] as? String
+                        
+                        self.sessionID = sessionID
+                        self.userID = userInfo
+                        
+                        print("The session_id is: ", sessionID)
+                        print("The userId is: ",userInfo)
+                        self.getUserdata(self.userID!) { (success, error) in
+                            
+                            CompletionHandler(result: self.userID, error: nil)
+                        }
+                        
+                    }
                 }
             }
             
@@ -87,6 +87,7 @@ class Client: NSObject {
         return task
         
     }
+    
     
     
     func logOutSession(completionHandler:(result: AnyObject!, error: NSError?) -> Void) -> NSURLSessionDataTask {
