@@ -102,7 +102,7 @@ class LogInViewController: UIViewController, UITextFieldDelegate{
         UIApplication.sharedApplication().openURL(url)
         
     }
-
+    
     
     // Login
     

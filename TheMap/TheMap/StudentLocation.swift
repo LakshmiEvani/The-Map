@@ -46,8 +46,6 @@ struct StudentLocation {
     }
     
     
-    
-    
     static func locationsFromDictionaries(dictionaries: [[String:AnyObject]]) -> [StudentLocation] {
         
         var studentLocations = [StudentLocation]()
@@ -63,7 +61,6 @@ struct StudentLocation {
         return studentLocations
         
     }
-    
     
     
 }

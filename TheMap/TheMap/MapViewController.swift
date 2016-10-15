@@ -68,6 +68,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
                         self.mapView.addAnnotations(annotations)
                     }
                 }
+                
             } else {
                 
                 print("Map downloaded failed")
@@ -159,7 +160,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     }
     
 }
-    
-    
-    
+
+
+
     
