@@ -55,22 +55,33 @@ class Client: NSObject {
                         return
                     }
                     
-                    if let parsedResult = result {
-                        
+                    if let parsedResult = result as? NSDictionary {
                         print("parsed Results:",parsedResult)
-                        let accountInfo = parsedResult["account"] as? NSDictionary
-                        let userInfo = accountInfo!["key"] as? String
-                        let jsonSession = parsedResult["session"] as? NSDictionary
-                        let sessionID = jsonSession!["id"] as? String
                         
-                        self.sessionID = sessionID
-                        self.userID = userInfo
-                        
-                        print("The session_id is: ", sessionID)
-                        print("The userId is: ",userInfo)
-                        self.getUserdata(self.userID!) { (success, error) in
+                        if let parsedError = parsedResult["error"] as? String {
+                            performUIUpdatesOnMain {
+                                let userInfo = [NSLocalizedDescriptionKey: "There was an error with your request: \(parsedError)"]
+                                CompletionHandler(result: nil, error: NSError(domain: "Invalid credentials", code: 1, userInfo: userInfo ))
+                            }
+                        } else {
                             
-                            CompletionHandler(result: self.userID, error: nil)
+                            print("parsed Results:",parsedResult)
+                            
+                            let accountInfo = parsedResult["account"] as? NSDictionary
+                            let userInfo = accountInfo!["key"] as? String
+                            let jsonSession = parsedResult["session"] as? NSDictionary
+                            let sessionID = jsonSession!["id"] as? String
+                            
+                            self.sessionID = sessionID
+                            self.userID = userInfo
+                            
+                            print("The session_id is: ", sessionID)
+                            print("The userId is: ",userInfo)
+                            self.getUserdata(self.userID!) { (success, error) in
+                                
+                                CompletionHandler(result: self.userID, error: nil)
+                                
+                            }
                         }
                         
                     }
@@ -88,7 +99,7 @@ class Client: NSObject {
         
     }
     
-    
+
     
     func logOutSession(completionHandler:(result: AnyObject!, error: NSError?) -> Void) -> NSURLSessionDataTask {
         
