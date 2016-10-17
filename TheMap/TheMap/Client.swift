@@ -14,7 +14,6 @@ class Client: NSObject {
     
     /* Authentication state */
     var sessionID: String? = nil
-    var studentLocations = [StudentLocation]()
     var userID : String? = nil
     
     
@@ -149,14 +148,18 @@ class Client: NSObject {
                 do {
                     
                     let result = try NSJSONSerialization.JSONObjectWithData(newData,options: NSJSONReadingOptions.AllowFragments) as! NSDictionary
+                
                     
                     // login succeeded, parse the data
                     let userData = result["user"] as! NSDictionary
-                    let firstName = userData["first_name"] as! String
                     let lastName = userData["last_name"] as! String
+                    let firstName = userData["first_name"] as! String
+                    
                     UdacityLoggedInUser.firstName = firstName
                     UdacityLoggedInUser.lastName = lastName
                     
+                    print("The first name is", firstName)
+                    print("The last name is", lastName)
                     completionHandler(success: true, error: nil)
                     
                     

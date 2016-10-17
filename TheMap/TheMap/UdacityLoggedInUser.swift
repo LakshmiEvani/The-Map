@@ -15,6 +15,4 @@ struct UdacityLoggedInUser {
     static var lastName = ""
     static var userId = ""
     
-    static var students: [StudentInformation] = [StudentInformation]()
-    
 }

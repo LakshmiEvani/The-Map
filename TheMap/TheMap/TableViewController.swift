@@ -77,7 +77,9 @@ class TableViewController: UITableViewController {
     //Function for defining the contents for each row
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        print("No of records in the array",StudentInformation.sharedInstance().studentLocation.count )
         return StudentInformation.sharedInstance().studentLocation.count
+      
     }
     
     

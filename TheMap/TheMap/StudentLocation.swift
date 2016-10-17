@@ -21,8 +21,7 @@ struct StudentLocation {
     var longitude: Double!
     var createdAt: NSDate
     var updatedAt: NSDate
-    
-    
+
     init(students : [String:AnyObject]) {
         
         let dateFormatter = NSDateFormatter()

@@ -50,6 +50,7 @@ class Parseclient : NSObject {
                 self.studentLocations = StudentLocation.locationsFromDictionaries(results)
                 StudentInformation.sharedInstance().studentLocation = self.studentLocations
                 
+                print("Student array information", StudentInformation.sharedInstance().studentLocation)
                 
                 completionHandler(result: self.studentLocations , error: nil)
                 

@@ -30,6 +30,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         
         parseClient.getStudentLocations { (results, error) in
             
+            print("Student location results: ", results)
             if error == nil {
                 
                 var annotations = [MKPointAnnotation]()
