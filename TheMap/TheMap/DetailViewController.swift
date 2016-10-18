@@ -203,10 +203,7 @@ class DetailViewController: UIViewController,MKMapViewDelegate, UITextFieldDeleg
             return
         }
         
-
-        
         Parseclient.sharedInstance().postStudentLocations(UdacityLoggedInUser.userId, firstName: UdacityLoggedInUser.firstName, lastName: UdacityLoggedInUser.lastName, mediaURL: mediaURL.text!, mapString: mapString.text!, longitude: studentLat, latitude: studentLon) { (success, error) in
-            
             
             if success {
                 
@@ -231,7 +228,6 @@ class DetailViewController: UIViewController,MKMapViewDelegate, UITextFieldDeleg
                     self.dismissViewControllerAnimated(true, completion: nil)
                 }
             }
-            
             
         }
     }

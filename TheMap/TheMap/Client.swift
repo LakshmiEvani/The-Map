@@ -131,7 +131,7 @@ class Client: NSObject {
     
     func getUserdata(uniqueKey: String, completionHandler:(success: Bool, error: NSError?) -> Void) -> NSURLSessionDataTask {
         
-        let request = NSMutableURLRequest(URL: NSURL(string: "https://www.udacity.com/api/users/5404309077")!)
+        let request = NSMutableURLRequest(URL: NSURL(string: "https://www.udacity.com/api/users/\(uniqueKey)")!)
         let session = NSURLSession.sharedSession()
         
         let task = session.dataTaskWithRequest(request) { data, response, error in
