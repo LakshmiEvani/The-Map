@@ -24,6 +24,7 @@
 		878EBFE01D3800D100485578 /* Client.swift in Sources */ = {isa = PBXBuildFile; fileRef = 878EBFDF1D3800D100485578 /* Client.swift */; };
 		878EBFE61D3BDB7F00485578 /* GCDBlackBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 878EBFE51D3BDB7F00485578 /* GCDBlackBox.swift */; };
 		87A3D7051DB0615E0068D618 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 87A3D7041DB0615E0068D618 /* Main.storyboard */; };
+		87B7B85A1DB679200009A158 /* Alerts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87B7B8591DB679200009A158 /* Alerts.swift */; };
 		87E231001D3E6AEF00B7A20A /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87E230FF1D3E6AEF00B7A20A /* MapViewController.swift */; };
 		87E296A51D6746D7009C5CBC /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87E296A41D6746D7009C5CBC /* TableViewController.swift */; };
 		87E296A91D6E4EF6009C5CBC /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87E296A81D6E4EF6009C5CBC /* DetailViewController.swift */; };
@@ -70,6 +71,7 @@
 		878EBFDF1D3800D100485578 /* Client.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Client.swift; sourceTree = "<group>"; };
 		878EBFE51D3BDB7F00485578 /* GCDBlackBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GCDBlackBox.swift; sourceTree = "<group>"; };
 		87A3D7041DB0615E0068D618 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		87B7B8591DB679200009A158 /* Alerts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Alerts.swift; path = ../Alerts.swift; sourceTree = "<group>"; };
 		87E230FF1D3E6AEF00B7A20A /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		87E296A41D6746D7009C5CBC /* TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
 		87E296A81D6E4EF6009C5CBC /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
@@ -172,6 +174,7 @@
 		878EBFDC1D3680A600485578 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				87B7B8591DB679200009A158 /* Alerts.swift */,
 				878EBFDA1D367B1D00485578 /* StudentInfo.swift */,
 				878EBFDD1D37CFA100485578 /* StudentLocation.swift */,
 				8773B69D1D92441E0012370E /* UdacityLoggedInUser.swift */,
@@ -331,6 +334,7 @@
 			files = (
 				878EBFAA1D2D5D8E00485578 /* LogInViewController.swift in Sources */,
 				8704306E1D4F8811008714CF /* Parseconstants.swift in Sources */,
+				87B7B85A1DB679200009A158 /* Alerts.swift in Sources */,
 				87E296A51D6746D7009C5CBC /* TableViewController.swift in Sources */,
 				878EBFA81D2D5D8E00485578 /* AppDelegate.swift in Sources */,
 				878EBFE01D3800D100485578 /* Client.swift in Sources */,

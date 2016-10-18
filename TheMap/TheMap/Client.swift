@@ -87,10 +87,6 @@ class Client: NSObject {
                 }
             }
             
-            
-            /* subset response data! */
-            //print(NSString(data: newData, encoding: NSUTF8StringEncoding))
-            
         }
         task.resume()
         
@@ -121,7 +117,6 @@ class Client: NSObject {
                 completionHandler(result: newData, error: nil)
                 
             }
-            //  print(NSString(data: newData, encoding: NSUTF8StringEncoding))
         }
         task.resume()
         return task
@@ -132,6 +127,7 @@ class Client: NSObject {
     func getUserdata(uniqueKey: String, completionHandler:(success: Bool, error: NSError?) -> Void) -> NSURLSessionDataTask {
         
         let request = NSMutableURLRequest(URL: NSURL(string: "https://www.udacity.com/api/users/\(uniqueKey)")!)
+   
         let session = NSURLSession.sharedSession()
         
         let task = session.dataTaskWithRequest(request) { data, response, error in
@@ -167,7 +163,7 @@ class Client: NSObject {
                 
                 
             }
-            // println(NSString(data: newData, encoding: NSUTF8StringEncoding))
+            
         }
         task.resume()
         return task

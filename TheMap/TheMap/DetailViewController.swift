@@ -67,7 +67,7 @@ class DetailViewController: UIViewController,MKMapViewDelegate, UITextFieldDeleg
     
     @IBAction func findOnTheMap(sender: AnyObject) {
         
-        secondView()
+      
         let geocoder = CLGeocoder()
         if let stringToGeocode = mapString.text {
             guard stringToGeocode != "" else {
@@ -79,7 +79,7 @@ class DetailViewController: UIViewController,MKMapViewDelegate, UITextFieldDeleg
                 return
             }
             
-            let activityView = UIActivityIndicatorView.init(activityIndicatorStyle: UIActivityIndicatorViewStyle.WhiteLarge)
+            let activityView = UIActivityIndicatorView.init(activityIndicatorStyle: UIActivityIndicatorViewStyle.Gray)
             activityView.center = view.center
             activityView.startAnimating()
             view.addSubview(activityView)
@@ -108,7 +108,7 @@ class DetailViewController: UIViewController,MKMapViewDelegate, UITextFieldDeleg
                     
                     return
                 }
-                
+                  self.secondView()
                 /* Assign the returned location to the userLocation property */
                 self.userLocation = placemark!
                 
